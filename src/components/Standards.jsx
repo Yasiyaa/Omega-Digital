@@ -199,12 +199,19 @@ function PillarCard({ pillar, isDormant }) {
 export default function Standards() {
   const containerRef = useRef(null);
   const consoleRef = useRef(null);
+  const matrixRef = useRef(null);
   const [excessHeight, setExcessHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Measure excess height on mount, resize, and element size changes so entire content is visible regardless of screen height
+  // Measure excess height on mount, resize, and element size changes
   useEffect(() => {
     const updateExcess = () => {
-      if (!consoleRef.current) return;
+      const mobile = window.innerWidth <= 991;
+      setIsMobile(mobile);
+      if (!consoleRef.current || mobile) {
+        setExcessHeight(0);
+        return;
+      }
       const consoleH = consoleRef.current.offsetHeight;
       const winH = window.innerHeight;
       // In sticky viewport, top padding is ~110px, bottom target padding is ~60px
@@ -226,26 +233,46 @@ export default function Standards() {
     };
   }, []);
 
-  // Track scroll position through the pinned standards container track (320vh)
-  const { scrollYProgress } = useScroll({
+  // Desktop scroll tracking through pinned track (320vh)
+  const { scrollYProgress: desktopProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end']
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
+  const smoothDesktopProgress = useSpring(desktopProgress, {
     stiffness: 120,
     damping: 24,
     restDelta: 0.001
   });
 
-  // Calculate percentage from 0 to 100 during active pinned scroll range [0.08, 0.78]
-  const scanPercent = useTransform(smoothProgress, [0.08, 0.78], [0, 100], { clamp: true });
-  const scanBeamTop = useTransform(scanPercent, (v) => `${v}%`);
-  const activeClipPath = useTransform(scanPercent, (v) => `inset(0 0 ${Math.max(0, 100 - v)}% 0)`);
-  const scanBeamOpacity = useTransform(smoothProgress, [0.03, 0.08, 0.78, 0.83], [0, 1, 1, 0]);
+  const desktopScanPercent = useTransform(smoothDesktopProgress, [0.08, 0.78], [0, 100], { clamp: true });
+  const desktopBeamTop = useTransform(desktopScanPercent, (v) => `${v}%`);
+  const desktopClipPath = useTransform(desktopScanPercent, (v) => `inset(0 0 ${Math.max(0, 100 - v)}% 0)`);
+  const desktopBeamOpacity = useTransform(smoothDesktopProgress, [0.03, 0.08, 0.78, 0.83], [0, 1, 1, 0]);
+  const desktopConsoleY = useTransform(smoothDesktopProgress, [0.18, 0.78], [0, -excessHeight]);
 
-  // Smoothly pan the console upward as the scanner sweeps down, so all content (cards + telemetry) is 100% visible
-  const consoleY = useTransform(smoothProgress, [0.18, 0.78], [0, -excessHeight]);
+  // Mobile scroll tracking: Snappy, quick scan sweep as section scrolls into view
+  const { scrollYProgress: mobileProgress } = useScroll({
+    target: matrixRef,
+    offset: ['start 85%', 'start 30%']
+  });
+
+  const smoothMobileProgress = useSpring(mobileProgress, {
+    stiffness: 240,
+    damping: 28,
+    restDelta: 0.001
+  });
+
+  const mobileScanPercent = useTransform(smoothMobileProgress, [0, 1], [0, 100], { clamp: true });
+  const mobileBeamTop = useTransform(mobileScanPercent, (v) => `${v}%`);
+  const mobileClipPath = useTransform(mobileScanPercent, (v) => `inset(0 0 ${Math.max(0, 100 - v)}% 0)`);
+  const mobileBeamOpacity = useTransform(smoothMobileProgress, [0, 0.05, 0.92, 1], [0, 1, 1, 0]);
+
+  // Viewport-adaptive transforms
+  const scanBeamTop = isMobile ? mobileBeamTop : desktopBeamTop;
+  const activeClipPath = isMobile ? mobileClipPath : desktopClipPath;
+  const scanBeamOpacity = isMobile ? mobileBeamOpacity : desktopBeamOpacity;
+  const consoleY = isMobile ? 0 : desktopConsoleY;
 
   return (
     <section className="standards-pinned-container" id="standards" ref={containerRef}>
@@ -265,7 +292,7 @@ export default function Standards() {
           </div>
 
           {/* The Matrix Container with Dual-Layer Scan Reveal */}
-          <div className="standards-matrix-wrapper">
+          <div className="standards-matrix-wrapper" ref={matrixRef}>
             {/* LAYER 1: The Blurred / Dormant Grid (Always underneath, visible where scanner hasn't reached) */}
             <div className="standards-grid dormant-grid" aria-hidden="true">
               {pillars.map((pillar) => (
