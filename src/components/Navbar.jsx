@@ -34,9 +34,7 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
-  const logoSrc = scrolled
-    ? '/Images/1 logo_Logo concept 1 copy 2.png'
-    : '/Images/1 logo_Logo concept 1 copy 4.png';
+  const logoSrc = '/Images/1 logo_Logo concept 1 copy 4.png';
 
   const navLinks = [
     { name: 'Services', href: '#services' },

@@ -22,8 +22,8 @@ export default function Manifesto() {
           >
             <span className="section-tag">THE OMEGA PHILOSOPHY</span>
             <h2 className="section-title">
-              Your Brand is More Than a Logo.<br />
-              It’s Your Competitive Edge.
+              Your Brand.<br />
+              Your Competitive Edge.
             </h2>
             <p className="manifesto-paragraph">
               Your brand carries your business into every interaction, every customer touchpoint, and every market opportunity. At the same time, modern enterprises run on systems. 

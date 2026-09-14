@@ -4,277 +4,231 @@ import {
   Palette, 
   Globe, 
   Cpu, 
-  Check, 
-  ArrowUpRight, 
-  CreditCard, 
-  Layers, 
-  Sparkles, 
-  Server, 
-  ShieldCheck, 
-  Mail, 
-  Database 
+  CheckCircle2, 
+  ArrowRight, 
+  ChevronDown,
+  Zap
 } from 'lucide-react';
 
 export default function Services() {
-  const [activePillar, setActivePillar] = useState('websites'); // 'branding' | 'websites' | 'webapps'
+  const [expandedStages, setExpandedStages] = useState({});
 
-  const pillars = [
+  const toggleStageExpand = (stageId) => {
+    setExpandedStages(prev => ({
+      ...prev,
+      [stageId]: !prev[stageId]
+    }));
+  };
+
+  const stages = [
     {
       id: 'branding',
-      tabLabel: 'Company Branding & Identity',
-      badge: 'Full Identity Suite',
-      title: 'Business Cards & Full Company Branding',
+      stepNumber: '01',
+      stepPhase: 'FOUNDATION',
+      title: 'Brand Systems & Corporate Identity',
       icon: Palette,
-      image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=80',
-      lead: 'Your brand is more than a logo — it’s the identity that carries your business into every interaction, every customer touchpoint, and every market opportunity.',
-      summary: 'Omega Digital delivers end-to-end corporate branding solutions designed to elevate your business into a premium, unified, and unforgettable brand experience.',
-      closing: 'Omega Digital ensures your brand is cohesive, premium, and instantly recognizable across print, digital, and physical environments.',
-      suite: [
-        {
-          name: 'Logo Design & Identity Creation',
-          desc: 'Custom-crafted logos reflecting personality, values, and market authority.'
-        },
-        {
-          name: 'Complete Stationery Suite',
-          desc: 'Business cards, letterheads, envelopes, folders, and invoice templates.'
-        },
-        {
-          name: 'Staff Identity Assets',
-          desc: 'Shirt name tags, ID badges, desk plaques, and company credential systems.'
-        },
-        {
-          name: 'Marketing & Sales Collateral',
-          desc: 'Sale signs, billboard designs, posters, flyers, brochures, and POS branding.'
-        },
-        {
-          name: 'Digital Brand Kits',
-          desc: 'Social media kits, profile banners, post templates, and digital assets.'
-        },
-        {
-          name: 'Website Branding Assets',
-          desc: 'Custom icons, UI components, brand-aligned graphics, and design systems.'
-        },
-        {
-          name: 'Brand Guidelines & Brand Book',
-          desc: 'Complete manual covering logo rules, palettes, typography, and tone of voice.'
-        }
+      image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=800&q=80',
+      summary: 'Cohesive, premium corporate brand systems engineered to establish instant market authority and command respect across print, digital, and physical environments.',
+      highlights: [
+        'Custom Logo & Vector Mark Architecture',
+        'Complete Executive Stationery Suite',
+        'Staff Identity & Credential Systems',
+        'Authoritative Brand Guidelines Book'
+      ],
+      deliverables: [
+        { name: 'Logo Design & Identity Creation', desc: 'Custom-crafted marks reflecting personality, values, and market authority.' },
+        { name: 'Complete Stationery Suite', desc: 'Business cards, letterheads, envelopes, folders, and invoice templates.' },
+        { name: 'Staff Identity Assets', desc: 'Shirt name tags, ID badges, desk plaques, and company credential systems.' },
+        { name: 'Marketing & Sales Collateral', desc: 'Sale signs, billboard designs, posters, flyers, brochures, and POS branding.' },
+        { name: 'Digital Brand Kits', desc: 'Social media kits, profile banners, post templates, and digital assets.' },
+        { name: 'Website Branding Assets', desc: 'Custom icons, UI components, brand-aligned graphics, and design systems.' },
+        { name: 'Brand Guidelines & Brand Book', desc: 'Complete manual covering logo rules, palettes, typography, and tone of voice.' }
       ]
     },
     {
       id: 'websites',
-      tabLabel: 'Corporate Websites',
-      badge: 'Signature Service',
-      title: 'Full Corporate Website with Brand Alignment',
+      stepNumber: '02',
+      stepPhase: 'HEADQUARTERS',
+      title: 'Corporate Website Platforms',
       icon: Globe,
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      lead: 'Your website is your digital headquarters — the place where customers form their first impression and decide whether your business is the one they trust.',
-      summary: 'Omega Digital builds premium corporate websites engineered for performance, credibility, and brand consistency.',
-      closing: 'Your website becomes a powerful digital asset — built to impress, convert, and grow with your business.',
-      suite: [
-        {
-          name: 'Brand-Aligned UI/UX Design',
-          desc: 'Custom corporate design matching your exact palette, typography, and voice.'
-        },
-        {
-          name: 'High-Performance Hosting — FREE for 1 Year',
-          desc: 'Ultra-fast, enterprise-grade cloud hosting included at zero cost for 12 months.'
-        },
-        {
-          name: 'Domain Registration — FREE for 1 Year',
-          desc: 'Seamless custom domain registration fully managed and secured.'
-        },
-        {
-          name: 'Professional Email Setup',
-          desc: 'Turnkey Hostinger business email and Google Workspace / Gmail integration.'
-        },
-        {
-          name: 'SEO-Ready Architecture',
-          desc: 'Structured metadata, clean semantic markup, and speed optimization for search rankings.'
-        },
-        {
-          name: 'Multi-Device Responsiveness',
-          desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops, and ultra-wide displays.'
-        }
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
+      summary: 'High-converting corporate websites engineered for sub-second performance, credibility, and brand consistency — fully inclusive of enterprise cloud hosting and managed domains.',
+      highlights: [
+        'High-Performance Hosting — FREE for 1 Year',
+        'Custom Domain Registration — FREE for 1 Year',
+        'Turnkey Professional Business Email',
+        'Technical SEO Architecture & Sub-second LCP'
+      ],
+      deliverables: [
+        { name: 'Brand-Aligned UI/UX Design', desc: 'Custom corporate design matching your exact palette, typography, and voice.' },
+        { name: 'High-Performance Hosting — FREE for 1 Year', desc: 'Ultra-fast, enterprise-grade cloud hosting included at zero cost for 12 months.' },
+        { name: 'Domain Registration — FREE for 1 Year', desc: 'Seamless custom domain registration fully managed and secured.' },
+        { name: 'Professional Email Setup', desc: 'Turnkey Hostinger business email and Google Workspace / Gmail integration.' },
+        { name: 'SEO-Ready Architecture', desc: 'Structured metadata, clean semantic markup, and speed optimization for search rankings.' },
+        { name: 'Multi-Device Responsiveness', desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops, and ultra-wide displays.' }
       ]
     },
     {
       id: 'webapps',
-      tabLabel: 'Web App Solutions & Systems',
-      badge: 'Operational Powerhouse',
-      title: 'Web App Solutions for Business',
+      stepNumber: '03',
+      stepPhase: 'OPERATIONS',
+      title: 'Web Apps & Business Systems',
       icon: Cpu,
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      lead: 'Modern businesses run on systems — and Omega Digital builds the systems that keep your operations moving.',
-      summary: 'Our custom web applications are engineered to streamline workflows, automate processes, and strengthen your backend infrastructure.',
-      closing: 'We design web apps that are secure, scalable, and tailored to your exact operational needs — helping your business run smoother, faster, and more efficiently.',
-      suite: [
-        {
-          name: 'Company Backend Systems',
-          desc: 'Robust centralized backends handling enterprise logic and secure operations.'
-        },
-        {
-          name: 'Production Management Platforms',
-          desc: 'End-to-end tracking for manufacturing, scheduling, and output management.'
-        },
-        {
-          name: 'Supply Chain & Logistics Dashboards',
-          desc: 'Real-time inventory levels, distribution metrics, and multi-hub tracking.'
-        },
-        {
-          name: 'Order Processing & Tracking Systems',
-          desc: 'Automated fulfillment pipelines from invoice generation to customer delivery.'
-        },
-        {
-          name: 'Internal Workflow Automation Tools',
-          desc: 'Eliminating repetitive manual bottlenecks with autonomous scripts and triggers.'
-        },
-        {
-          name: 'Custom Business Portals & Admin Panels',
-          desc: 'Secure role-based access control (RBAC) portals for staff, management, and clients.'
-        }
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+      summary: 'Custom web applications and operational dashboards tailored to eliminate manual bottlenecks, streamline workflows, and automate core enterprise operations.',
+      highlights: [
+        'Centralized Company Backend Systems',
+        'Real-time Inventory & Logistics Dashboards',
+        'Automated Order Processing Engines',
+        'Granular Role-Based Security & Permissions'
+      ],
+      deliverables: [
+        { name: 'Company Backend Systems', desc: 'Robust centralized backends handling enterprise logic and secure operations.' },
+        { name: 'Production Management Platforms', desc: 'End-to-end tracking for manufacturing, scheduling, and output management.' },
+        { name: 'Supply Chain & Logistics Dashboards', desc: 'Real-time visibility into inventory, order pipelines, and shipment tracking.' },
+        { name: 'Order Processing & Tracking Systems', desc: 'Automated workflows from customer order placement to delivery fulfillment.' },
+        { name: 'Internal Workflow Automation', desc: 'Eliminate repetitive manual tasks through reliable custom automation pipelines.' },
+        { name: 'Custom Portals & Admin Panels', desc: 'Tailored administrative interfaces with role-based security and granular permissions.' }
       ]
     }
   ];
 
-  const current = pillars.find((p) => p.id === activePillar) || pillars[0];
-  const IconComponent = current.icon;
-
   return (
     <section className="services-section" id="services">
       <div className="container">
-        <div className="section-header center-text">
-          <span className="section-tag">CORE DISCIPLINES</span>
-          <h2 className="section-title">Built for Performance, Credibility & Scale</h2>
-          <p className="section-subtitle">
-            Explore our three flagship service pillars engineered to transform your market perception and streamline internal operations.
-          </p>
+        {/* Section Header */}
+        <div className="services-header center-text">
+          <span className="section-tag">SYSTEM LIFECYCLE // 3-STAGE PIPELINE</span>
+          <h2 className="section-title">From Brand Identity to Enterprise Systems</h2>
         </div>
 
-        {/* Pillar Switcher Navigation */}
-        <div className="pillar-nav-wrapper">
-          <div className="pillar-tabs">
-            {pillars.map((pillar) => {
-              const TabIcon = pillar.icon;
-              const isActive = activePillar === pillar.id;
-              return (
-                <button
-                  key={pillar.id}
-                  className={`pillar-tab-btn ${isActive ? 'active' : ''}`}
-                  onClick={() => setActivePillar(pillar.id)}
-                >
-                  <TabIcon size={18} />
-                  <span>{pillar.tabLabel}</span>
-                  {pillar.badge === 'Signature Service' && (
-                    <span className="tab-pill">Popular</span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* Minimal 3-Column Glass Bento Grid */}
+        <div className="minimal-services-grid">
+          {stages.map((stage) => {
+            const isExpanded = !!expandedStages[stage.id];
+            const Icon = stage.icon;
 
-        {/* Active Pillar Showcase Card */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current.id}
-            className="pillar-display-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Top Banner Grid */}
-            <div className="pillar-banner-grid">
-              <div className="pillar-info-pane">
-                <span className="pillar-badge">{current.badge}</span>
-                <h3 className="pillar-title">{current.title}</h3>
-                <p className="pillar-lead">{current.lead}</p>
-                <p className="pillar-summary">{current.summary}</p>
-                
-                <div className="pillar-cta-row">
-                  <a href="#contact" className="glass-btn pillar-cta-btn">
-                    <span>Consult with an Architect</span>
-                    <ArrowUpRight size={16} />
+            return (
+              <div key={stage.id} className="minimal-service-card">
+                {/* Top Subtle Luminous Rim */}
+                <div className="minimal-card-rim-glow" />
+
+                {/* Card Top Media Banner */}
+                <div className="minimal-card-media-banner">
+                  <img
+                    src={stage.image}
+                    alt={stage.title}
+                    className="minimal-card-img"
+                    loading="lazy"
+                  />
+                  <div className="minimal-card-media-overlay" />
+                  
+                  {/* Floating Meta Badges */}
+                  <div className="minimal-card-media-top">
+                    <span className="minimal-step-index">
+                      <span className="step-dot" />
+                      // {stage.stepNumber}
+                    </span>
+                    <span className="minimal-phase-tag">{stage.stepPhase}</span>
+                  </div>
+
+                  <div className="minimal-card-icon-wrap">
+                    <Icon size={18} className="minimal-card-icon" />
+                  </div>
+                </div>
+
+                {/* Title & Summary */}
+                <div className="minimal-card-body">
+                  <h3 className="minimal-card-title">{stage.title}</h3>
+                  <p className="minimal-card-summary">{stage.summary}</p>
+                </div>
+
+                {/* Hairline Divider */}
+                <div className="minimal-card-divider" />
+
+                {/* Key Deliverables Highlights */}
+                <div className="minimal-highlights-section">
+                  <span className="minimal-highlights-label">Core Deliverables</span>
+                  <ul className="minimal-highlights-list">
+                    {stage.highlights.map((point) => (
+                      <li key={point} className="minimal-highlight-item">
+                        <CheckCircle2 size={15} className="minimal-check-icon" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Expandable Specifications Inclusions */}
+                <div className="minimal-inclusions-wrapper">
+                  <button
+                    type="button"
+                    onClick={() => toggleStageExpand(stage.id)}
+                    className="minimal-expand-btn"
+                    aria-expanded={isExpanded}
+                  >
+                    <span>{isExpanded ? 'Hide Specifications' : `View Full Scope (${stage.deliverables.length} Items)`}</span>
+                    <ChevronDown
+                      size={15}
+                      style={{
+                        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease'
+                      }}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        className="minimal-deliverables-drawer"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className="minimal-drawer-inner">
+                          {stage.deliverables.map((item) => (
+                            <div key={item.name} className="minimal-deliverable-box">
+                              <span className="deliverable-box-name">{item.name}</span>
+                              <p className="deliverable-box-desc">{item.desc}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Card Footer Actions */}
+                <div className="minimal-card-footer">
+                  <a href="#contact" className="minimal-card-cta">
+                    <span>Deploy Stage {stage.stepNumber}</span>
+                    <ArrowRight size={15} />
                   </a>
                 </div>
               </div>
-
-              <div className="pillar-media-pane">
-                <img
-                  src={current.image}
-                  alt={current.title}
-                  className="pillar-showcase-img"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            {/* Included Capabilities Grid */}
-            <div className="pillar-suite-section">
-              <h4 className="suite-heading">What We Deliver in this Discipline:</h4>
-              <div className="suite-grid">
-                {current.suite.map((item) => (
-                  <div key={item.name} className="suite-item">
-                    <div className="suite-icon-bullet">
-                      <Check size={16} />
-                    </div>
-                    <div>
-                      <h5 className="suite-item-name">{item.name}</h5>
-                      <p className="suite-item-desc">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pillar-closing-quote">
-                <p>&ldquo;{current.closing}&rdquo;</p>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Value Callout Banner: What You Receive Free */}
-        <div className="value-perks-banner">
-          <div className="perks-header">
-            <Sparkles size={24} className="perks-sparkle" />
-            <div>
-              <h4 className="perks-title">The Omega Digital Corporate Guarantee</h4>
-              <p className="perks-desc">Every full corporate website engagement includes enterprise-grade infrastructure to start without friction.</p>
-            </div>
-          </div>
-
-          <div className="perks-grid">
-            <div className="perk-box">
-              <Server size={20} />
-              <div>
-                <strong>High-Performance Cloud Hosting</strong>
-                <span>FREE for 1 Year with 99.9% uptime</span>
-              </div>
-            </div>
-            <div className="perk-box">
-              <Globe size={20} />
-              <div>
-                <strong>Custom Domain Registration</strong>
-                <span>FREE for 1 Year, fully configured & secured</span>
-              </div>
-            </div>
-            <div className="perk-box">
-              <Mail size={20} />
-              <div>
-                <strong>Business Email Integration</strong>
-                <span>Hostinger & Google Workspace / Gmail setup</span>
-              </div>
-            </div>
-            <div className="perk-box">
-              <ShieldCheck size={20} />
-              <div>
-                <strong>SEO & Security Hardening</strong>
-                <span>Search-optimized, SSL encrypted, zero-trust</span>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
+        {/* Bottom Milestone Integration Banner */}
+        <div className="minimal-bottom-banner">
+          <div className="minimal-bottom-content">
+            <div className="minimal-bottom-icon">
+              <Zap size={22} />
+            </div>
+            <div className="minimal-bottom-text">
+              <h4 className="minimal-bottom-title">Need an Integrated End-to-End Solution?</h4>
+              <p className="minimal-bottom-desc">
+                From your initial logo design to a high-converting digital headquarters and custom backend logistics systems — Omega Digital unifies your entire technology ecosystem under one authoritative roof.
+              </p>
+            </div>
+            <a href="#contact" className="glass-btn minimal-bottom-btn">
+              <span>Initiate Consultation</span>
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

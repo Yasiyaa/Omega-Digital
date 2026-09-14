@@ -11,6 +11,9 @@ export default function Hero() {
     { name: 'SYNAPSE LABS', symbol: '◈' }
   ];
 
+  // Duplicate partners to form an unbroken continuous ribbon loop
+  const tickerPartners = [...partners, ...partners, ...partners, ...partners];
+
   return (
     <section className="hero-section" id="hero">
       {/* Background Video Banner */}
@@ -76,17 +79,19 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Bottom Frosted Glass Trust Bar */}
+      {/* Bottom Frosted Glass Trust Bar with Continuous Ribbon Marquee */}
       <div className="hero-trust-bar">
         <div className="trust-container">
           <p className="trust-label">Proudly Trusted By Forward-Thinking Businesses</p>
-          <div className="client-logos-ticker">
-            {partners.map((partner) => (
-              <div key={partner.name} className="client-logo-item">
-                <span className="logo-symbol">{partner.symbol}</span>
-                <span>{partner.name}</span>
-              </div>
-            ))}
+          <div className="ticker-track-wrapper">
+            <div className="ticker-track">
+              {tickerPartners.map((partner, index) => (
+                <div key={`${partner.name}-${index}`} className="client-logo-item">
+                  <span className="logo-symbol">{partner.symbol}</span>
+                  <span>{partner.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
