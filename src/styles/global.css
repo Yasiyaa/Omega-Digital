@@ -1606,81 +1606,435 @@ button {
   color: rgba(255, 255, 255, 0.78);
 }
 
-.process-steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 2rem;
-  margin-top: 4rem;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.process-section .step-card {
-  padding: 2.4rem 2rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45);
+.timeline-wrapper {
   position: relative;
-  transition: var(--transition-smooth);
-  min-width: 0;
+  margin-top: 5rem;
+  width: 100%;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
+  padding-bottom: 2rem;
+}
+
+/* Continuous Vertical Conduit Spine Track */
+.timeline-spine-track {
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  bottom: 3.5rem;
+  width: 3px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Dynamic Illuminated Neon Laser Beam (Driven by Scroll) */
+.timeline-spine-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #38BDF8 0%, #2563EB 50%, #818CF8 100%);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.85), 0 0 24px rgba(37, 99, 235, 0.6);
+  border-radius: 9999px;
+  transform-origin: top center;
+}
+
+.timeline-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5.5rem;
+  position: relative;
+  z-index: 2;
   width: 100%;
 }
 
-.process-section .step-card:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(56, 189, 248, 0.45);
-  box-shadow: 0 20px 45px -10px rgba(37, 99, 235, 0.35);
+/* Row Layout — Desktop Alternating Left/Right */
+.timeline-step-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5.5rem;
+  position: relative;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.step-card-header {
+.timeline-step-row.step-left .timeline-card-col {
+  grid-column: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timeline-step-row.step-right .timeline-card-col {
+  grid-column: 2;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Central Node Anchor */
+.timeline-node-anchor {
+  position: absolute;
+  left: 50%;
+  top: 2.5rem;
+  transform: translate(-50%, 0);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-node {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.timeline-node-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(56, 189, 248, 0.7);
+  animation: neonNodePulse 2.6s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes neonNodePulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8);
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+    box-shadow: 0 0 16px 8px rgba(56, 189, 248, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
+}
+
+.timeline-node-core {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #070B14;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+/* Connector Arms Linking Node to Card */
+.timeline-connector {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.step-left .timeline-connector {
+  right: 24px;
+  width: calc(2.75rem - 22px);
+}
+
+.step-right .timeline-connector {
+  left: 24px;
+  width: calc(2.75rem - 22px);
+}
+
+.step-left .timeline-connector-beam {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, rgba(56, 189, 248, 0.95), rgba(37, 99, 235, 0.5));
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  transform-origin: right center;
+}
+
+.step-right .timeline-connector-beam {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.95), rgba(37, 99, 235, 0.5));
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  transform-origin: left center;
+}
+
+/* Card Column & Neon Depth Layer */
+.timeline-card-col {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timeline-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 510px;
+  box-sizing: border-box;
+}
+
+/* The Signature Neon Backlight Glow Layer */
+.timeline-neon-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 36px;
+  background: radial-gradient(ellipse 90% 80% at center, rgba(56, 189, 248, 0.52) 0%, rgba(37, 99, 235, 0.3) 42%, rgba(129, 140, 248, 0.12) 65%, transparent 75%);
+  filter: blur(36px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity, transform;
+}
+
+/* Elevated Obsidian Glass Surface */
+.timeline-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(11, 18, 32, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-xl, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2.25rem 2.2rem;
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.75), transparent);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.timeline-card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 28px 60px -12px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+.timeline-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.25rem;
 }
 
-.process-section .step-number {
-  font-size: 2.6rem;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.22);
-  line-height: 1;
+.timeline-phase-pill {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brand-azure-light);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 0.28rem 0.72rem;
+  border-radius: var(--radius-full);
+}
+
+.card-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-azure-light);
   transition: var(--transition-smooth);
 }
 
-.process-section .step-card:hover .step-number {
-  color: var(--brand-azure-light);
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
-}
-
-.process-section .step-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--brand-azure-light);
-  transition: var(--transition-smooth);
-}
-
-.process-section .step-card:hover .step-icon {
-  transform: scale(1.1);
+.timeline-card:hover .card-icon-badge {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.5);
   color: #FFFFFF;
+  transform: scale(1.06);
 }
 
-.process-section .step-title {
-  font-size: 1.25rem;
+.timeline-card-title {
+  font-size: 1.35rem;
   font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
-.process-section .step-text {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.65;
+.timeline-card-text {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-deliverables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.timeline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.68rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+}
+
+.timeline-chip .chip-icon {
+  color: var(--brand-azure-light);
+  flex-shrink: 0;
+}
+
+.timeline-watermark {
+  position: absolute;
+  bottom: 0.4rem;
+  right: 1.1rem;
+  font-size: 5.5rem;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  color: rgba(255, 255, 255, 0.035);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Process Timeline Responsive Behavior (Tablet & Mobile)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .timeline-wrapper {
+    margin-top: 3.5rem;
+  }
+
+  /* Shift spine to left rail */
+  .timeline-spine-track {
+    left: 1.6rem;
+    transform: none;
+  }
+
+  .timeline-steps-list {
+    gap: 3.5rem;
+  }
+
+  .timeline-step-row {
+    display: block;
+    padding-left: 3.8rem;
+    column-gap: 0;
+  }
+
+  .timeline-step-row.step-left .timeline-card-col,
+  .timeline-step-row.step-right .timeline-card-col {
+    display: block;
+    width: 100%;
+  }
+
+  .timeline-card-wrapper {
+    max-width: 100%;
+  }
+
+  /* Reposition node on left rail */
+  .timeline-node-anchor {
+    left: 1.6rem;
+    transform: translate(-50%, 0);
+  }
+
+  .timeline-node {
+    width: 40px;
+    height: 40px;
+  }
+
+  .timeline-node-core {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+
+  /* Connector arms point to the right on all steps */
+  .step-left .timeline-connector,
+  .step-right .timeline-connector {
+    left: 20px;
+    right: auto;
+    width: 2.2rem;
+  }
+
+  .step-left .timeline-connector-beam,
+  .step-right .timeline-connector-beam {
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.9), rgba(37, 99, 235, 0.5));
+    transform-origin: left center;
+  }
+
+  .timeline-card {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .timeline-card-title {
+    font-size: 1.2rem;
+  }
+
+  .timeline-watermark {
+    font-size: 4.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-spine-track {
+    left: 1.3rem;
+  }
+
+  .timeline-step-row {
+    padding-left: 3.2rem;
+  }
+
+  .timeline-node-anchor {
+    left: 1.3rem;
+  }
+
+  .step-left .timeline-connector,
+  .step-right .timeline-connector {
+    left: 18px;
+    width: 1.9rem;
+  }
+
+  .timeline-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .timeline-chip {
+    font-size: 0.7rem;
+    padding: 0.28rem 0.58rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
