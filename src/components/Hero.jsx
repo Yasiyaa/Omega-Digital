@@ -1,19 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
-  const partners = [
-    { name: 'MONARCH SERVICES', symbol: '◆' },
-    { name: 'ACUMEN DYNAMICS', symbol: '▲' },
-    { name: 'VERTEX GLOBAL', symbol: '●' },
-    { name: 'MERIDIAN CAPITAL', symbol: '◼' },
-    { name: 'SYNAPSE LABS', symbol: '◈' }
-  ];
-
-  // Duplicate partners to form an unbroken continuous ribbon loop
-  const tickerPartners = [...partners, ...partners, ...partners, ...partners];
-
   return (
     <section className="hero-section" id="hero">
       {/* Background Video Banner */}
@@ -69,31 +58,14 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.75 }}
         >
-          <a href="#work" className="glass-btn hero-primary-btn">
-            <span>Explore Our Solutions</span>
+          <a href="#standards" className="glass-btn hero-primary-btn">
+            <span>Explore Our Standards</span>
             <ArrowRight size={18} />
           </a>
           <a href="#contact" className="secondary-hero-btn">
             <span>Start a Project</span>
           </a>
         </motion.div>
-      </div>
-
-      {/* Bottom Frosted Glass Trust Bar with Continuous Ribbon Marquee */}
-      <div className="hero-trust-bar">
-        <div className="trust-container">
-          <p className="trust-label">Proudly Trusted By Forward-Thinking Businesses</p>
-          <div className="ticker-track-wrapper">
-            <div className="ticker-track">
-              {tickerPartners.map((partner, index) => (
-                <div key={`${partner.name}-${index}`} className="client-logo-item">
-                  <span className="logo-symbol">{partner.symbol}</span>
-                  <span>{partner.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

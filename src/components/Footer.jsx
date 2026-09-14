@@ -66,7 +66,7 @@ export default function Footer() {
               <li><a href="#hero">Home</a></li>
               <li><a href="#about">Philosophy</a></li>
               <li><a href="#services">Solutions</a></li>
-              <li><a href="#work">Deployments</a></li>
+              <li><a href="#standards">The Standard</a></li>
               <li><a href="#process">Methodology</a></li>
               <li><a href="#contact">Inquire</a></li>
             </ul>
