@@ -570,21 +570,67 @@ button {
   box-sizing: border-box;
   white-space: normal;
   text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .badge-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #10B981;
-  box-shadow: 0 0 10px #10B981;
-  animation: pulse-dot 2s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: dot-chase 3s infinite ease-in-out;
 }
 
-@keyframes pulse-dot {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+.badge-separator-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: dot-chase 3s infinite ease-in-out;
+}
+
+.badge-dot.dot-1 {
+  animation-delay: 0s;
+}
+
+.badge-separator-dot.dot-2 {
+  animation-delay: 0.65s;
+}
+
+.badge-separator-dot.dot-3 {
+  animation-delay: 1.3s;
+}
+
+@keyframes dot-chase {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.85);
+    background: #10B981;
+    box-shadow: 0 0 2px rgba(16, 185, 129, 0.3);
+  }
+  14% {
+    opacity: 1;
+    transform: scale(1.35);
+    background: #34D399;
+    box-shadow: 0 0 14px 3px rgba(16, 185, 129, 0.95);
+  }
+  28% {
+    opacity: 0.35;
+    transform: scale(0.85);
+    background: #10B981;
+    box-shadow: 0 0 2px rgba(16, 185, 129, 0.3);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+    background: #10B981;
+    box-shadow: 0 0 2px rgba(16, 185, 129, 0.3);
+  }
 }
 
 .hero-title {
@@ -842,6 +888,7 @@ button {
   line-height: 1.1;
   margin-bottom: 0.35rem;
   text-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
@@ -1147,10 +1194,17 @@ button {
   line-height: 1.45;
 }
 
+.minimal-check-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 .minimal-check-icon {
   color: #38BDF8;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
 /* Inclusions Expand Button & Drawer */
@@ -1402,34 +1456,35 @@ button {
    -------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------
    The Omega Standard (Architectural Rigor & Cybernetic Telemetry)
-   Pinned Sticky Scroll Console
+   High-Caliber Diagnostic Showcase (Fluid & Unstuck)
    -------------------------------------------------------------------------- */
+.standards-section,
 .standards-pinned-container {
   position: relative;
-  height: 320vh;
+  min-height: 100vh;
+  padding: 6.5rem 2rem 7rem;
   background: 
     radial-gradient(ellipse 70% 50% at 50% 40%, rgba(37, 99, 235, 0.16) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 75%),
     var(--bg-dark);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Sticky Viewport - Locks in place on scroll with generous top spacing and unclipped visibility */
-.standards-sticky-viewport {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   overflow: visible;
   box-sizing: border-box;
-  padding-top: clamp(6.5rem, 11vh, 8.5rem);
-  padding-bottom: clamp(3rem, 5vh, 4.5rem);
-  padding-left: 2rem;
-  padding-right: 2rem;
+}
+
+.standards-viewport,
+.standards-sticky-viewport {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  box-sizing: border-box;
   z-index: 5;
 }
 
@@ -1444,7 +1499,7 @@ button {
 }
 
 .standards-console-header {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -1478,14 +1533,16 @@ button {
 .standards-matrix-wrapper {
   position: relative;
   width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
   margin-top: 0.5rem;
 }
 
 /* Sweeping Laser Diagnostic Scan Line */
 .standards-scan-beam {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -0.75rem;
+  right: -0.75rem;
   height: 3px;
   z-index: 10;
   pointer-events: none;
@@ -1601,7 +1658,7 @@ button {
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-md, 14px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.25rem;
+  padding: 1.35rem 1.45rem;
   overflow: hidden;
   box-sizing: border-box;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -1982,14 +2039,14 @@ button {
 
 /* Responsive Styles for Standards Section */
 @media (max-width: 991px) {
+  .standards-section,
   .standards-pinned-container {
-    height: auto !important;
+    padding: 6.5rem 1.25rem 7rem !important;
   }
 
+  .standards-viewport,
   .standards-sticky-viewport {
-    position: relative !important;
-    height: auto !important;
-    padding: 5.5rem 1.25rem 6rem;
+    padding: 0 !important;
   }
 
   .standards-grid {
@@ -3218,3 +3275,307 @@ button {
   overflow-x: hidden;
   box-sizing: border-box;
 }
+
+/* ==========================================================================
+   Contact Modal Dialog (Modern Luxury Cybernetic Popup)
+   ========================================================================== */
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.contact-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 14, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  pointer-events: none;
+}
+
+.contact-modal-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 660px;
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  background: rgba(11, 18, 32, 0.95);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: var(--radius-lg, 22px);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(56, 189, 248, 0.15);
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+/* Custom Sleek Scrollbar for Modal Card */
+.contact-modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contact-modal-card::-webkit-scrollbar-track {
+  background: rgba(11, 18, 32, 0.5);
+  border-radius: 9999px;
+}
+
+.contact-modal-card::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+}
+
+.contact-modal-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+}
+
+.contact-modal-rim-glow {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.85), transparent);
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7));
+  pointer-events: none;
+}
+
+.contact-modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  z-index: 20;
+}
+
+.contact-modal-close-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
+}
+
+.contact-modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.modal-header-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.modal-confidentiality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.contact-modal-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.contact-modal-subtext {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0;
+}
+
+.contact-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.modal-sla-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.modal-sla-hint .sla-icon {
+  color: var(--brand-azure);
+}
+
+.contact-modal-submit-btn {
+  padding: 0.75rem 1.8rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.submit-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Success Confirmation Screen */
+.contact-modal-success {
+  text-align: center;
+  padding: 2.2rem 1rem;
+}
+
+.success-icon-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  margin-bottom: 1.4rem;
+}
+
+.success-pulse-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.2);
+  filter: blur(8px);
+  animation: telemetryPulse 2.5s infinite;
+}
+
+.success-check-icon {
+  color: var(--brand-azure);
+  position: relative;
+  z-index: 2;
+}
+
+.success-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.success-description {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 480px;
+  margin: 0 auto 1.6rem;
+}
+
+.success-meta-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1.2rem;
+  margin-bottom: 2rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.success-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.success-meta-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.success-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.success-close-btn {
+  min-width: 130px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.success-resubmit-btn {
+  background: none;
+  border: none;
+  color: var(--brand-azure);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.success-resubmit-btn:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .contact-modal-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .modal-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .contact-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-modal-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

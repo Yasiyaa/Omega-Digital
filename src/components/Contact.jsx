@@ -50,7 +50,7 @@ export default function Contact() {
             <span className="section-tag">START YOUR TRANSFORMATION</span>
             <h2 className="section-title">Let’s Build Something Remarkable</h2>
             <p className="contact-subtext">
-              Whether you need complete corporate branding, a high-converting digital headquarters, or a custom operational web application, our architecture team is ready.
+              Whether you need complete corporate branding, a high-converting digital headquarters, or a custom operational web application, our architecture / implementation team is ready.
             </p>
           </div>
 
@@ -83,7 +83,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="service">Core Discipline Required</label>
+                <label htmlFor="service">Core Disciplines Required</label>
                 <select
                   id="service"
                   name="service"
@@ -100,7 +100,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="timeline">Target Delivery Timeline</label>
+                <label htmlFor="timeline">Expected Delivery Time</label>
                 <select
                   id="timeline"
                   name="timeline"
@@ -114,7 +114,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group full-width">
-                <label htmlFor="message">Project Requirements & Operational Scope</label>
+                <label htmlFor="message">Requirements & Operational Scope</label>
                 <textarea
                   id="message"
                   name="message"

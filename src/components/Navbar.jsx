@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ onOpenContact }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -76,10 +76,17 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="nav-actions">
-            <a href="#contact" className="glass-btn nav-cta-btn">
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenContact) onOpenContact();
+              }}
+              className="glass-btn nav-cta-btn"
+              aria-label="Open contact consultation popup"
+            >
               <span>Contact Us</span>
               <ArrowUpRight size={16} />
-            </a>
+            </button>
 
             <button
               className="mobile-toggle"
@@ -138,14 +145,18 @@ export default function Navbar() {
                   </a>
                 ))}
 
-                <a
-                  href="#contact"
+                <button
+                  type="button"
                   className="glass-btn mobile-cta-btn"
-                  onClick={handleLinkClick}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    if (onOpenContact) onOpenContact();
+                  }}
+                  aria-label="Open contact consultation popup"
                 >
-                  <span>Start a Project</span>
+                  <span>Contact Us</span>
                   <ArrowUpRight size={16} />
-                </a>
+                </button>
               </div>
             </motion.div>
           </>

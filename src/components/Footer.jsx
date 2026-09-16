@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mail, MapPin, Clock } from 'lucide-react';
 
-export default function Footer() {
+export default function Footer({ onOpenContact }) {
   return (
     <footer className="site-footer">
       <div className="container">
@@ -16,7 +16,7 @@ export default function Footer() {
               />
             </a>
             <p className="footer-tagline">
-              Modern businesses run on systems — and Omega Digital builds the systems, corporate headquarters, and unified brands that keep operations moving.
+              Modern businesses demand precision — At Omega Digital we deliver systems, digital HQs and cohesive brand identities that keep operations efficient, scalable, and future-ready.
             </p>
             <div className="footer-socials">
               <a href="#" aria-label="LinkedIn">
@@ -68,7 +68,19 @@ export default function Footer() {
               <li><a href="#services">Solutions</a></li>
               <li><a href="#standards">The Standard</a></li>
               <li><a href="#process">Methodology</a></li>
-              <li><a href="#contact">Inquire</a></li>
+              <li>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    if (onOpenContact) {
+                      e.preventDefault();
+                      onOpenContact();
+                    }
+                  }}
+                >
+                  Inquire
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -77,7 +89,7 @@ export default function Footer() {
             <h4 className="footer-col-title">Direct Inquiries</h4>
             <div className="footer-contact-info">
               <p><Mail size={18} /> <span>hello@omegadigital.com</span></p>
-              <p><MapPin size={18} /> <span>London & Colombo Hubs</span></p>
+              <p><MapPin size={18} /> <span>London & Melbourne Hubs</span></p>
               <p><Clock size={18} /> <span>Mon – Fri: 09:00 – 18:00 GMT</span></p>
             </div>
           </div>

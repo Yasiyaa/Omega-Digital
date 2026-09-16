@@ -44,7 +44,7 @@ const steps = [
     phase: 'PHASE 04 // EXPANSION',
     title: 'Deployment & Scale',
     icon: Rocket,
-    text: 'Seamless rollout, automated CI/CD pipelines, and dedicated post-launch optimization for enduring success.',
+    text: 'Seamless rollout, automated CI/CD pipelines, and dedicated post-launch optimizations for enduring success.',
     deliverables: [
       'Automated CI/CD Pipelines',
       'Global CDN Orchestration',
@@ -228,7 +228,7 @@ export default function Process() {
           <span className="section-tag">HOW WE WORK</span>
           <h2 className="section-title">A Structured Path to Distinction</h2>
           <p className="section-subtitle">
-            Every engagement follows our battle-tested methodology designed to deliver on time, within scope, and above expectation.
+            Every engagement follows our methodology designed to deliver on time, within scope, and above expectation.
           </p>
         </div>
 

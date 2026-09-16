@@ -10,7 +10,46 @@ import {
   Zap
 } from 'lucide-react';
 
-export default function Services() {
+const highlightListVariants = {
+  hidden: { opacity: 1 },
+  visible: (customIdx = 0) => ({
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: customIdx * 0.15 + 0.15
+    }
+  })
+};
+
+const highlightItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+const checkIconVariants = {
+  hidden: { scale: 0.4, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 450,
+      damping: 22
+    }
+  }
+};
+
+export default function Services({ onOpenContact }) {
   const [expandedStages, setExpandedStages] = useState({});
 
   const toggleStageExpand = (stageId) => {
@@ -104,7 +143,7 @@ export default function Services() {
 
         {/* Minimal 3-Column Glass Bento Grid */}
         <div className="minimal-services-grid">
-          {stages.map((stage) => {
+          {stages.map((stage, stageIdx) => {
             const isExpanded = !!expandedStages[stage.id];
             const Icon = stage.icon;
 
@@ -149,14 +188,30 @@ export default function Services() {
                 {/* Key Deliverables Highlights */}
                 <div className="minimal-highlights-section">
                   <span className="minimal-highlights-label">Core Deliverables</span>
-                  <ul className="minimal-highlights-list">
+                  <motion.ul
+                    className="minimal-highlights-list"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.5, margin: "0px 0px -120px 0px" }}
+                    custom={stageIdx}
+                    variants={highlightListVariants}
+                  >
                     {stage.highlights.map((point) => (
-                      <li key={point} className="minimal-highlight-item">
-                        <CheckCircle2 size={15} className="minimal-check-icon" />
+                      <motion.li
+                        key={point}
+                        className="minimal-highlight-item"
+                        variants={highlightItemVariants}
+                      >
+                        <motion.span
+                          className="minimal-check-wrap"
+                          variants={checkIconVariants}
+                        >
+                          <CheckCircle2 size={15} className="minimal-check-icon" />
+                        </motion.span>
                         <span>{point}</span>
-                      </li>
+                      </motion.li>
                     ))}
-                  </ul>
+                  </motion.ul>
                 </div>
 
                 {/* Expandable Specifications Inclusions */}
@@ -201,7 +256,16 @@ export default function Services() {
 
                 {/* Card Footer Actions */}
                 <div className="minimal-card-footer">
-                  <a href="#contact" className="minimal-card-cta">
+                  <a
+                    href="#contact"
+                    className="minimal-card-cta"
+                    onClick={(e) => {
+                      if (onOpenContact) {
+                        e.preventDefault();
+                        onOpenContact();
+                      }
+                    }}
+                  >
                     <span>Deploy Stage {stage.stepNumber}</span>
                     <ArrowRight size={15} />
                   </a>
@@ -223,7 +287,16 @@ export default function Services() {
                 From your initial logo design to a high-converting digital headquarters and custom backend logistics systems — Omega Digital unifies your entire technology ecosystem under one authoritative roof.
               </p>
             </div>
-            <a href="#contact" className="glass-btn minimal-bottom-btn">
+            <a
+              href="#contact"
+              className="glass-btn minimal-bottom-btn"
+              onClick={(e) => {
+                if (onOpenContact) {
+                  e.preventDefault();
+                  onOpenContact();
+                }
+              }}
+            >
               <span>Initiate Consultation</span>
               <ArrowRight size={16} />
             </a>

@@ -197,91 +197,59 @@ function PillarCard({ pillar, isDormant }) {
 }
 
 export default function Standards() {
-  const containerRef = useRef(null);
-  const consoleRef = useRef(null);
+  const sectionRef = useRef(null);
   const matrixRef = useRef(null);
-  const [excessHeight, setExcessHeight] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Measure excess height on mount, resize, and element size changes
-  useEffect(() => {
-    const updateExcess = () => {
-      const mobile = window.innerWidth <= 991;
-      setIsMobile(mobile);
-      if (!consoleRef.current || mobile) {
-        setExcessHeight(0);
-        return;
-      }
-      const consoleH = consoleRef.current.offsetHeight;
-      const winH = window.innerHeight;
-      // In sticky viewport, top padding is ~110px, bottom target padding is ~60px
-      const availableH = winH - 170;
-      const diff = Math.max(0, consoleH - availableH);
-      setExcessHeight(diff);
-    };
-
-    updateExcess();
-    window.addEventListener('resize', updateExcess);
-    let ro;
-    if (window.ResizeObserver && consoleRef.current) {
-      ro = new ResizeObserver(updateExcess);
-      ro.observe(consoleRef.current);
-    }
-    return () => {
-      window.removeEventListener('resize', updateExcess);
-      if (ro) ro.disconnect();
-    };
-  }, []);
-
-  // Desktop scroll tracking through pinned track (320vh)
-  const { scrollYProgress: desktopProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end']
+  // Track scroll position through the matrix cards: speed is 100% controlled by scrolling
+  const { scrollYProgress } = useScroll({
+    target: matrixRef,
+    offset: ['start 80%', 'end 35%']
   });
 
-  const smoothDesktopProgress = useSpring(desktopProgress, {
-    stiffness: 120,
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
     damping: 24,
     restDelta: 0.001
   });
 
-  const desktopScanPercent = useTransform(smoothDesktopProgress, [0.08, 0.78], [0, 100], { clamp: true });
-  const desktopBeamTop = useTransform(desktopScanPercent, (v) => `${v}%`);
-  const desktopClipPath = useTransform(desktopScanPercent, (v) => `inset(0 0 ${Math.max(0, 100 - v)}% 0)`);
-  const desktopBeamOpacity = useTransform(smoothDesktopProgress, [0.03, 0.08, 0.78, 0.83], [0, 1, 1, 0]);
-  const desktopConsoleY = useTransform(smoothDesktopProgress, [0.18, 0.78], [0, -excessHeight]);
+  // One-way monotonic latch: progress advances with scroll, never reverses on scroll up
+  const [isFullyScanned, setIsFullyScanned] = useState(false);
+  const latchedPercent = useMotionValue(0);
 
-  // Mobile scroll tracking: Snappy, quick scan sweep as section scrolls into view
-  const { scrollYProgress: mobileProgress } = useScroll({
-    target: matrixRef,
-    offset: ['start 85%', 'start 30%']
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on('change', (latest) => {
+      const targetPercent = Math.min(100, Math.max(0, latest * 100));
+      if (targetPercent > latchedPercent.get()) {
+        latchedPercent.set(targetPercent);
+      }
+      if (targetPercent >= 98 && !isFullyScanned) {
+        latchedPercent.set(100);
+        setIsFullyScanned(true);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [smoothProgress, isFullyScanned]);
+
+  // Derived transforms
+  const scanBeamTop = useTransform(latchedPercent, (v) => `${v}%`);
+  const activeClipPath = useTransform(latchedPercent, (v) => {
+    if (isFullyScanned) return 'inset(0 0 0% 0)';
+    const remaining = Math.max(0, 100 - v);
+    return `inset(0 0 ${remaining}% 0)`;
   });
 
-  const smoothMobileProgress = useSpring(mobileProgress, {
-    stiffness: 240,
-    damping: 28,
-    restDelta: 0.001
+  const scanBeamOpacity = useTransform(latchedPercent, (v) => {
+    if (isFullyScanned || v >= 99) return 0;
+    if (v < 0.5) return 0;
+    if (v < 4) return (v - 0.5) / 3.5;
+    return 1;
   });
-
-  const mobileScanPercent = useTransform(smoothMobileProgress, [0, 1], [0, 100], { clamp: true });
-  const mobileBeamTop = useTransform(mobileScanPercent, (v) => `${v}%`);
-  const mobileClipPath = useTransform(mobileScanPercent, (v) => `inset(0 0 ${Math.max(0, 100 - v)}% 0)`);
-  const mobileBeamOpacity = useTransform(smoothMobileProgress, [0, 0.05, 0.92, 1], [0, 1, 1, 0]);
-
-  // Viewport-adaptive transforms
-  const scanBeamTop = isMobile ? mobileBeamTop : desktopBeamTop;
-  const activeClipPath = isMobile ? mobileClipPath : desktopClipPath;
-  const scanBeamOpacity = isMobile ? mobileBeamOpacity : desktopBeamOpacity;
-  const consoleY = isMobile ? 0 : desktopConsoleY;
 
   return (
-    <section className="standards-pinned-container" id="standards" ref={containerRef}>
-      <div className="standards-sticky-viewport">
-        <motion.div
-          className="container standards-console-container"
-          ref={consoleRef}
-          style={{ y: consoleY }}
-        >
+    <section className="standards-section standards-pinned-container" id="standards" ref={sectionRef}>
+      <div className="standards-viewport standards-sticky-viewport">
+        <div className="container standards-console-container">
           {/* Section Header */}
           <div className="section-header center-text standards-console-header">
             <span className="section-tag">THE OMEGA STANDARD</span>
@@ -293,8 +261,15 @@ export default function Standards() {
 
           {/* The Matrix Container with Dual-Layer Scan Reveal */}
           <div className="standards-matrix-wrapper" ref={matrixRef}>
-            {/* LAYER 1: The Blurred / Dormant Grid (Always underneath, visible where scanner hasn't reached) */}
-            <div className="standards-grid dormant-grid" aria-hidden="true">
+            {/* LAYER 1: The Blurred / Dormant Grid */}
+            <div
+              className="standards-grid dormant-grid"
+              aria-hidden="true"
+              style={{
+                opacity: isFullyScanned ? 0 : undefined,
+                visibility: isFullyScanned ? 'hidden' : 'visible'
+              }}
+            >
               {pillars.map((pillar) => (
                 <PillarCard key={pillar.code} pillar={pillar} isDormant={true} />
               ))}
@@ -312,22 +287,22 @@ export default function Standards() {
               ))}
             </motion.div>
 
-            {/* THE LASER DIAGNOSTIC SCANNER LINE (Exactly on the clip seam) */}
-            <motion.div
-              className="standards-scan-beam"
-              style={{
-                top: scanBeamTop,
-                opacity: scanBeamOpacity
-              }}
-            >
-              <div className="scan-beam-core" />
-              <div className="scan-beam-glow" />
-              <div className="scan-beam-tag">DIAGNOSTIC_SCAN // IN_PROGRESS</div>
-            </motion.div>
+            {/* THE LASER DIAGNOSTIC SCANNER LINE */}
+            {!isFullyScanned && (
+              <motion.div
+                className="standards-scan-beam"
+                style={{
+                  top: scanBeamTop,
+                  opacity: scanBeamOpacity
+                }}
+              >
+                <div className="scan-beam-core" />
+                <div className="scan-beam-glow" />
+                <div className="scan-beam-tag">DIAGNOSTIC_SCAN // IN_PROGRESS</div>
+              </motion.div>
+            )}
           </div>
-
-
-        </motion.div>
+        </div>
       </div>
     </section>
   );

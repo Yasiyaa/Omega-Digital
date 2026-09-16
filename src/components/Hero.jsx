@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-export default function Hero() {
+export default function Hero({ onOpenContact }) {
   return (
     <section className="hero-section" id="hero">
       {/* Background Video Banner */}
@@ -29,8 +29,12 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <span className="badge-dot" />
-          <span>Brand Systems &bull; Corporate Websites &bull; Web Applications</span>
+          <span className="badge-dot dot-1" />
+          <span>Brand Systems</span>
+          <span className="badge-separator-dot dot-2" />
+          <span>Corporate Websites</span>
+          <span className="badge-separator-dot dot-3" />
+          <span>Web Applications</span>
         </motion.div>
 
         <motion.h1
@@ -39,8 +43,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45 }}
         >
-          Businesses Run on Systems. <br className="desktop-only" />
-          <span className="gradient-text">We Build the Foundation.</span>
+          The Infrastructure Behind Modern Business. <br className="desktop-only" />
+          <span className="gradient-text">Businesses Run on Systems. We Build the Foundation.</span>
         </motion.h1>
 
         <motion.p
@@ -49,7 +53,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          From iconic brand identity and custom corporate websites to scalable backend architectures and operational dashboards — Omega Digital engineers digital assets built to impress, convert, and scale.
+          From iconic brand identity and custom corporate websites to scalable backend architectures and operational dashboards — Omega Digital engineers digital assets built to impress, convert and scale.
         </motion.p>
 
         <motion.div
@@ -62,7 +66,16 @@ export default function Hero() {
             <span>Explore Our Standards</span>
             <ArrowRight size={18} />
           </a>
-          <a href="#contact" className="secondary-hero-btn">
+          <a
+            href="#contact"
+            className="secondary-hero-btn"
+            onClick={(e) => {
+              if (onOpenContact) {
+                e.preventDefault();
+                onOpenContact();
+              }
+            }}
+          >
             <span>Start a Project</span>
           </a>
         </motion.div>
