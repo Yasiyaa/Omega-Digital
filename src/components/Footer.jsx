@@ -11,12 +11,12 @@ export default function Footer({ onOpenContact }) {
             <a href="#hero" className="footer-logo">
               <img
                 src="/Images/1 logo_Logo concept 1 copy 4.png"
-                alt="Omega Digital"
+                alt="Omega Innovation"
                 className="footer-logo-img"
               />
             </a>
             <p className="footer-tagline">
-              Modern businesses demand precision — At Omega Digital we deliver systems, digital HQs and cohesive brand identities that keep operations efficient, scalable, and future-ready.
+              Modern businesses demand precision — At Omega Innovation we deliver systems, digital HQs and cohesive brand identities that keep operations efficient, scalable, and future-ready.
             </p>
             <div className="footer-socials">
               <a href="#" aria-label="LinkedIn">
@@ -88,15 +88,35 @@ export default function Footer({ onOpenContact }) {
           <div className="footer-nav-col">
             <h4 className="footer-col-title">Direct Inquiries</h4>
             <div className="footer-contact-info">
-              <p><Mail size={18} /> <span>hello@omegadigital.com</span></p>
-              <p><MapPin size={18} /> <span>London & Melbourne Hubs</span></p>
-              <p><Clock size={18} /> <span>Mon – Fri: 09:00 – 18:00 GMT</span></p>
+              <p><Mail size={18} /> <span>hello@omegainnovation.com</span></p>
+              <p><MapPin size={18} /> <span>Colombo & Melbourne Hubs</span></p>
+
+              <div className="footer-hours-block">
+                <div className="footer-hours-header">
+                  <Clock size={15} />
+                  <span>Business Hours</span>
+                </div>
+                <div className="footer-hours-list">
+                  <div className="hours-entry">
+                    <span className="hours-days">Monday – Friday:</span>
+                    <span className="hours-time">8:00 am – 6:00 pm</span>
+                  </div>
+                  <div className="hours-entry">
+                    <span className="hours-days">Saturday:</span>
+                    <span className="hours-time">8:30 am – 2:00 pm</span>
+                  </div>
+                  <div className="hours-entry">
+                    <span className="hours-days">Sunday & Holidays:</span>
+                    <span className="hours-time hours-closed">Closed</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Omega Digital. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Omega Innovation. All rights reserved.</p>
           <div className="footer-legal-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

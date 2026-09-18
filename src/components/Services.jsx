@@ -136,10 +136,16 @@ export default function Services({ onOpenContact }) {
     <section className="services-section" id="services">
       <div className="container">
         {/* Section Header */}
-        <div className="services-header center-text">
+        <motion.div
+          className="services-header center-text"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-tag">SYSTEM LIFECYCLE // 3-STAGE PIPELINE</span>
           <h2 className="section-title">From Brand Identity to Enterprise Systems</h2>
-        </div>
+        </motion.div>
 
         {/* Minimal 3-Column Glass Bento Grid */}
         <div className="minimal-services-grid">
@@ -148,7 +154,19 @@ export default function Services({ onOpenContact }) {
             const Icon = stage.icon;
 
             return (
-              <div key={stage.id} className="minimal-service-card">
+              <motion.div
+                key={stage.id}
+                className="minimal-service-card"
+                initial={{ opacity: 0, y: 50, rotateX: 6 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                whileHover={{ y: -6 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{
+                  duration: 0.75,
+                  delay: stageIdx * 0.15,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+              >
                 {/* Top Subtle Luminous Rim */}
                 <div className="minimal-card-rim-glow" />
 
@@ -171,9 +189,20 @@ export default function Services({ onOpenContact }) {
                     <span className="minimal-phase-tag">{stage.stepPhase}</span>
                   </div>
 
-                  <div className="minimal-card-icon-wrap">
+                  <motion.div
+                    className="minimal-card-icon-wrap"
+                    initial={{ scale: 0.7, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 400,
+                      damping: 20,
+                      delay: 0.25 + stageIdx * 0.15
+                    }}
+                  >
                     <Icon size={18} className="minimal-card-icon" />
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Title & Summary */}
@@ -270,13 +299,19 @@ export default function Services({ onOpenContact }) {
                     <ArrowRight size={15} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Bottom Milestone Integration Banner */}
-        <div className="minimal-bottom-banner">
+        <motion.div
+          className="minimal-bottom-banner"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="minimal-bottom-content">
             <div className="minimal-bottom-icon">
               <Zap size={22} />
@@ -284,7 +319,7 @@ export default function Services({ onOpenContact }) {
             <div className="minimal-bottom-text">
               <h4 className="minimal-bottom-title">Need an Integrated End-to-End Solution?</h4>
               <p className="minimal-bottom-desc">
-                From your initial logo design to a high-converting digital headquarters and custom backend logistics systems — Omega Digital unifies your entire technology ecosystem under one authoritative roof.
+                From your initial logo design to a high-converting digital headquarters and custom backend logistics systems — Omega Innovation unifies your entire technology ecosystem under one authoritative roof.
               </p>
             </div>
             <a
@@ -301,7 +336,7 @@ export default function Services({ onOpenContact }) {
               <ArrowRight size={16} />
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

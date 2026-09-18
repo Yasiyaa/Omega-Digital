@@ -1,12 +1,39 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 export default function Hero({ onOpenContact }) {
+  const containerRef = useRef(null);
+
+  // Track scroll within the Hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start']
+  });
+
+  // Calibrated spring for organic, liquid inertia
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    restDelta: 0.001
+  });
+
+  // Parallax video banner transformations (moves slower + subtle expansion)
+  const videoY = useTransform(smoothProgress, [0, 1], ['0%', '16%']);
+  const videoScale = useTransform(smoothProgress, [0, 1], [1, 1.08]);
+
+  // Foreground text lifting & atmospheric fade
+  const contentY = useTransform(smoothProgress, [0, 1], ['0px', '-90px']);
+  const contentOpacity = useTransform(smoothProgress, [0, 0.75], [1, 0]);
+  const contentScale = useTransform(smoothProgress, [0, 1], [1, 0.95]);
+
   return (
-    <section className="hero-section" id="hero">
-      {/* Background Video Banner */}
-      <div className="video-background-wrapper">
+    <section className="hero-section" id="hero" ref={containerRef}>
+      {/* Parallax Background Video Banner */}
+      <motion.div
+        className="video-background-wrapper"
+        style={{ y: videoY, scale: videoScale }}
+      >
         <video
           autoPlay
           muted
@@ -19,10 +46,17 @@ export default function Hero({ onOpenContact }) {
           Your browser does not support HTML5 video.
         </video>
         <div className="video-overlay" />
-      </div>
+      </motion.div>
 
-      {/* Hero Content */}
-      <div className="hero-content">
+      {/* Parallax Floating Hero Content */}
+      <motion.div
+        className="hero-content"
+        style={{
+          y: contentY,
+          opacity: contentOpacity,
+          scale: contentScale
+        }}
+      >
         <motion.div
           className="hero-badge"
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +87,7 @@ export default function Hero({ onOpenContact }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          Omega Digital creates high-performance digital ecosystems; combining brand identity, corporate websites, web applications, backend infrastructure, and business dashboards into systems designed to impress, convert, and grow with your organisation.
+          Omega Innovation creates high-performance digital ecosystems; combining brand identity, corporate websites, web applications, backend infrastructure, and business dashboards into systems designed to impress, convert, and grow with your organisation.
         </motion.p>
 
         <motion.div
@@ -79,7 +113,7 @@ export default function Hero({ onOpenContact }) {
             <span>Start a Project</span>
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

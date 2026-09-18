@@ -1,6 +1,6 @@
-# Omega Digital — Digital Architecture & Creative Craft
+# Omega Innovation — Digital Architecture & Creative Craft
 
-> Modern businesses run on systems — and Omega Digital builds the systems, corporate headquarters, and unified brands that keep operations moving.
+> Modern businesses run on systems — and Omega Innovation builds the systems, corporate headquarters, and unified brands that keep operations moving.
 
 ![React](https://img.shields.io/badge/React-18-blue?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-6-purple?logo=vite)
@@ -11,7 +11,7 @@
 
 ## ?? Overview
 
-**Omega Digital** is a high-performance digital agency web application engineered with React, Vite, Framer Motion, and Lenis smooth scrolling.
+**Omega Innovation** is a high-performance digital agency web application engineered with React, Vite, Framer Motion, and Lenis smooth scrolling.
 
 ### Key Capabilities
 - **Floating Frosted Glass Navigation**: Dynamic scroll-state responsive pill with seamless mobile drawer and touch lock.
@@ -69,4 +69,4 @@ npm run preview
 ---
 
 ## ?? License
-© 2026 Omega Digital. All rights reserved.
+© 2026 Omega Innovation. All rights reserved.

@@ -149,7 +149,7 @@ export default function Contact() {
 
               {status === 'success' && (
                 <span className="form-status success">
-                  Thank you. An Omega Digital partner will review your requirements and reach out within 24 hours.
+                  Thank you. An Omega Innovation partner will review your requirements and reach out within 24 hours.
                 </span>
               )}
             </div>

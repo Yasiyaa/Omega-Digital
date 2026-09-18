@@ -74,11 +74,16 @@ function TimelineStepItem({ step, index }) {
   const opacity = useTransform(smoothProgress, [0, 1], [0.2, 1]);
   const scale = useTransform(smoothProgress, [0, 1], [0.94, 1]);
   const y = useTransform(smoothProgress, [0, 1], [36, 0]);
+  const rotateY = isLeft
+    ? useTransform(smoothProgress, [0, 1], [-5, 0])
+    : useTransform(smoothProgress, [0, 1], [5, 0]);
   const glowOpacity = useTransform(smoothProgress, [0, 0.6, 1], [0, 0.4, 0.95]);
   const glowScale = useTransform(smoothProgress, [0, 1], [0.85, 1.06]);
   const connectorScaleX = useTransform(smoothProgress, [0, 0.7, 1], [0, 0.6, 1]);
   const nodeScale = useTransform(smoothProgress, [0, 0.8, 1], [0.88, 1.25, 1]);
   const nodePulseOpacity = useTransform(smoothProgress, [0, 0.7, 1], [0, 0.85, 1]);
+  const shockwaveScale = useTransform(smoothProgress, [0.25, 0.8, 1], [0.8, 1.65, 2.1]);
+  const shockwaveOpacity = useTransform(smoothProgress, [0.25, 0.7, 1], [0, 0.85, 0]);
 
   const Icon = step.icon;
 
@@ -93,6 +98,15 @@ function TimelineStepItem({ step, index }) {
           className="timeline-node"
           style={{ scale: nodeScale }}
         >
+          {/* Active Radar Shockwave Ring */}
+          <motion.div
+            className="timeline-node-shockwave"
+            style={{
+              scale: shockwaveScale,
+              opacity: shockwaveOpacity
+            }}
+          />
+
           {/* Neon Pulse Rings */}
           <motion.div
             className="timeline-node-pulse"
@@ -155,6 +169,7 @@ function TimelineStepItem({ step, index }) {
               opacity,
               scale,
               y,
+              rotateY,
               borderColor: useTransform(
                 smoothProgress,
                 [0, 1],
@@ -224,13 +239,19 @@ export default function Process() {
     <section className="process-section" id="process">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header center-text">
+        <motion.div
+          className="section-header center-text"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <span className="section-tag">HOW WE WORK</span>
           <h2 className="section-title">A Structured Path to Distinction</h2>
           <p className="section-subtitle">
             Every engagement follows our methodology designed to deliver on time, within scope and above expectation.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Architecture */}
         <div ref={containerRef} className="timeline-wrapper">

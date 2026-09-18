@@ -1,10 +1,28 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView, animate } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform, useSpring, animate } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 export default function Manifesto() {
+  const sectionRef = useRef(null);
   const statsRef = useRef(null);
   const isInView = useInView(statsRef, { once: true, margin: '0px 0px -140px 0px' });
+
+  // Parallax tracking across Manifesto section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 85,
+    damping: 24,
+    restDelta: 0.001
+  });
+
+  // Parallax multi-plane offsets
+  const frameY = useTransform(smoothProgress, [0, 1], ['-32px', '32px']);
+  const badgeY = useTransform(smoothProgress, [0, 1], ['22px', '-22px']);
+  const imgScale = useTransform(smoothProgress, [0, 1], [1.04, 0.98]);
 
   const [countPercent, setCountPercent] = useState(0);
   const [countYear, setCountYear] = useState(0);
@@ -48,7 +66,7 @@ export default function Manifesto() {
   ];
 
   return (
-    <section className="manifesto-section" id="about">
+    <section className="manifesto-section" id="about" ref={sectionRef}>
       <div className="container">
         <div className="manifesto-grid">
           {/* Left Column: Editorial Philosophy & Metrics */}
@@ -66,35 +84,52 @@ export default function Manifesto() {
             <p className="manifesto-paragraph">
               Your brand carries your business into every interaction, every customer touchpoint, and every market opportunity. At the same time, modern enterprises run on systems. 
               <br /><br />
-              Omega Digital builds the systems that keep your operations moving — from unified brand identities and digital headquarters to custom web applications engineered to streamline workflows, automate processes, and strengthen backend infrastructure.
+              Omega Innovation builds the systems that keep your operations moving — from unified brand identities and digital headquarters to custom web applications engineered to streamline workflows, automate processes, and strengthen backend infrastructure.
             </p>
 
-            <div className="stats-row" ref={statsRef}>
-              {stats.map((stat) => (
-                <div key={stat.label} className="stat-card">
-                  <span className="stat-number">{stat.number}</span>
-                  <span className="stat-label">{stat.label}</span>
-                </div>
-              ))}
+            <div className="stats-wrapper" ref={statsRef}>
+              <motion.div
+                className="stats-accent-line"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              />
+              <div className="stats-row">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="stat-card">
+                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Visual Frame with Floating Glass Badge */}
+          {/* Right Column: Visual Frame with Multi-Plane Floating Glass Badge */}
           <motion.div
             className="manifesto-visual-frame"
+            style={{ y: frameY }}
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
-              alt="Omega Digital Strategic Studio"
-              className="manifesto-main-img"
-              loading="lazy"
-            />
+            <div className="manifesto-img-wrapper">
+              <motion.img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
+                alt="Omega Innovation Strategic Studio"
+                className="manifesto-main-img"
+                style={{ scale: imgScale }}
+                loading="lazy"
+              />
+              <div className="manifesto-img-overlay" />
+            </div>
 
-            <div className="manifesto-floating-badge">
+            <motion.div
+              className="manifesto-floating-badge"
+              style={{ y: badgeY }}
+            >
               <div className="badge-icon">
                 <Sparkles size={22} />
               </div>
@@ -102,7 +137,7 @@ export default function Manifesto() {
                 <div className="badge-text-title">Digital Headquarters</div>
                 <div className="badge-text-subtitle">Built to Impress, Convert & Scale</div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

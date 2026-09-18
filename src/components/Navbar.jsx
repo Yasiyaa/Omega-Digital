@@ -57,10 +57,10 @@ export default function Navbar({ onOpenContact }) {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Logo */}
-          <a href="#hero" className="brand-logo" aria-label="Omega Digital Home">
+          <a href="#hero" className="brand-logo" aria-label="Omega Innovation Home">
             <img
               src={logoSrc}
-              alt="Omega Digital"
+              alt="Omega Innovation"
               className="nav-logo-img"
             />
           </a>

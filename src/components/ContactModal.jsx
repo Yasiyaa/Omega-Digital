@@ -245,7 +245,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   <div className="contact-modal-footer">
                     <div className="modal-sla-hint">
                       <Clock size={14} className="sla-icon" />
-                      <span>Guaranteed response within 24 hours</span>
+                      <span>Mon–Fri 8am–6pm &bull; Response within 24h</span>
                     </div>
 
                     <button

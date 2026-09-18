@@ -1,5 +1,5 @@
 /**
- * Omega Digital — Interactive Controller
+ * Omega Innovation — Interactive Controller
  * Handles floating navigation transitions, responsive mobile drawer,
  * logo dynamic switching between hero & light sections, and contact inquiry submission.
  */
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Simulate instantaneous enterprise submission
       setTimeout(() => {
         submitBtn.innerHTML = `<span>Inquiry Received</span> <i data-lucide="check"></i>`;
-        formStatus.textContent = 'Thank you. An Omega Digital partner will reach out within 24 hours.';
+        formStatus.textContent = 'Thank you. An Omega Innovation partner will reach out within 24 hours.';
         formStatus.className = 'form-status success';
         contactForm.reset();
 
