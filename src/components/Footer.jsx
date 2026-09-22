@@ -62,6 +62,25 @@ export default function Footer({ onOpenContact }) {
                 </svg>
               </a>
             </div>
+
+            {/* Regulatory Registration */}
+            <div className="footer-registration">
+              <span className="footer-reg-label">Registered On</span>
+              <a
+                href="https://asic.gov.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-asic-link"
+                aria-label="Registered on ASIC - Australian Securities & Investments Commission"
+              >
+                <img
+                  src="/Images/asic-logo-white.png"
+                  alt="ASIC - Australian Securities & Investments Commission"
+                  className="footer-asic-logo"
+                  loading="lazy"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Solutions & Services */}
@@ -164,7 +183,11 @@ export default function Footer({ onOpenContact }) {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Omega Innovation. All rights reserved.</p>
+          <div className="footer-copyright-wrap">
+            <p>&copy; {new Date().getFullYear()} Omega Innovation. All rights reserved.</p>
+            <span className="footer-bottom-sep">&bull;</span>
+            <span className="footer-abn">ABN: 41 701 214 002</span>
+          </div>
           <div className="footer-legal-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

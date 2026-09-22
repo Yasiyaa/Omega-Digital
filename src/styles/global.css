@@ -243,9 +243,11 @@ button {
 }
 
 .preloader-logo {
-  height: 72px;
+  height: 98px;
   width: auto;
-  filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.45));
+  max-width: 85vw;
+  object-fit: contain;
+  filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.45));
 }
 
 .preloader-brand-title {
@@ -2877,6 +2879,49 @@ button {
   height: 18px;
 }
 
+/* Regulatory Registration */
+.footer-registration {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.footer-reg-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.footer-asic-link {
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.25s ease;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.footer-asic-link:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.3));
+}
+
+.footer-asic-logo {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+  display: block;
+}
+
+.footer-asic-link:hover .footer-asic-logo {
+  opacity: 1;
+}
+
 .footer-col-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -3085,6 +3130,25 @@ button {
   color: rgba(255, 255, 255, 0.5);
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.footer-copyright-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-sep {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+}
+
+.footer-abn {
+  color: rgba(255, 255, 255, 0.65);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  font-weight: 500;
 }
 
 .footer-legal-links {
@@ -3478,6 +3542,11 @@ button {
     gap: 1.2rem;
   }
 
+  .footer-copyright-wrap {
+    justify-content: center;
+    text-align: center;
+  }
+
   .footer-legal-links {
     flex-wrap: wrap;
     justify-content: center;
@@ -3607,6 +3676,19 @@ button {
     height: 30px;
     font-size: 0.65rem;
     border-radius: 5px;
+  }
+
+  .preloader-logo {
+    height: 82px;
+    max-width: 82vw;
+  }
+
+  .footer-registration {
+    margin-top: 1.5rem;
+  }
+
+  .footer-asic-logo {
+    height: 64px;
   }
 }
 
