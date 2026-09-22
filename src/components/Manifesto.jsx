@@ -82,9 +82,9 @@ export default function Manifesto() {
               Your Competitive Edge.
             </h2>
             <p className="manifesto-paragraph">
-              Your brand carries your business into every interaction, every customer touchpoint, and every market opportunity. At the same time, modern enterprises run on systems. 
+              Your brand shapes perception, builds trust and creates meaningful connections at every stage of the customer journey. Behind every successful business, however, is a powerful digital foundation that enables growth, efficiency and innovation.
               <br /><br />
-              Omega Innovation builds the systems that keep your operations moving — from unified brand identities and digital headquarters to custom web applications engineered to streamline workflows, automate processes, and strengthen backend infrastructure.
+              At Omega Innovation, we design and develop the digital ecosystems that power modern businesses. From strategic brand identities and immersive digital experiences to custom web applications and intelligent automation, we create solutions that streamline operations, enhance performance and position organisations for sustainable growth.
             </p>
 
             <div className="stats-wrapper" ref={statsRef}>

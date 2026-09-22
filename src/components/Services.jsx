@@ -4,136 +4,104 @@ import {
   Palette, 
   Globe, 
   Cpu, 
-  CheckCircle2, 
   ArrowRight, 
-  ChevronDown,
-  Zap
+  Sparkles, 
+  Zap 
 } from 'lucide-react';
 
-const highlightListVariants = {
-  hidden: { opacity: 1 },
-  visible: (customIdx = 0) => ({
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: customIdx * 0.15 + 0.15
-    }
-  })
-};
-
-const highlightItemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 16
+const stages = [
+  {
+    id: 'branding',
+    stepNumber: '01',
+    stepPhase: 'PHASE 01 // FOUNDATION',
+    tabLabel: '01. Brand Systems',
+    title: 'Brand Systems & Corporate Identity',
+    tagline: 'Tangible authority engineered for print, physical spaces, and digital presence.',
+    icon: Palette,
+    image: '/Images/services/brand-identity-atelier.jpg',
+    imageAlt: 'Luxury corporate brand identity, business cards and brand guidelines book',
+    hallmark: 'Bespoke Vector Mark & Executive Stationery Suite',
+    badgeText: '300 DPI // PRINT & EMBOSS READY',
+    specs: [
+      { label: 'Format', val: 'Vector & 300 DPI' },
+      { label: 'Collateral', val: '7 Complete Sets' },
+      { label: 'Guidelines', val: 'Full Brand Manual' }
+    ],
+    summary: 'Cohesive, premium corporate brand systems engineered to establish instant market authority and command respect across print, digital, and physical environments.',
+    deliverables: [
+      { num: '01', name: 'Logo Design & Identity Creation', desc: 'Custom-crafted marks reflecting personality, values, and market authority.' },
+      { num: '02', name: 'Complete Stationery Suite', desc: 'Business cards, letterheads, envelopes, folders, and invoice templates.' },
+      { num: '03', name: 'Staff Identity Assets', desc: 'Shirt name tags, ID badges, desk plaques, and company credential systems.' },
+      { num: '04', name: 'Marketing & Sales Collateral', desc: 'Sale signs, billboard designs, posters, flyers, brochures, and POS branding.' },
+      { num: '05', name: 'Digital Brand Kits', desc: 'Social media kits, profile banners, post templates, and digital assets.' },
+      { num: '06', name: 'Website Branding Assets', desc: 'Custom icons, UI components, brand-aligned graphics, and design systems.' },
+      { num: '07', name: 'Brand Guidelines & Brand Book', desc: 'Complete manual covering logo rules, palettes, typography, and tone of voice.' }
+    ]
   },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1]
-    }
+  {
+    id: 'websites',
+    stepNumber: '02',
+    stepPhase: 'PHASE 02 // HEADQUARTERS',
+    tabLabel: '02. Corporate Web Platforms',
+    title: 'Corporate Website Platforms',
+    tagline: 'Sub-second responsiveness synchronized across all executive viewports.',
+    icon: Globe,
+    image: '/Images/services/responsive-devices-atelier.jpg',
+    imageAlt: 'Responsive corporate website mockup across laptop, tablet, and smartphone',
+    hallmark: '1-Year Complimentary Cloud Hosting & Managed Domain Included',
+    badgeText: 'MULTI-DEVICE // SUB-SECOND LCP',
+    specs: [
+      { label: 'Cloud Hosting', val: 'Free for 1 Year' },
+      { label: 'Domain Registration', val: 'Free for 1 Year' },
+      { label: 'Performance', val: 'Sub-second LCP' }
+    ],
+    summary: 'High-converting corporate websites engineered for sub-second performance, credibility, and brand consistency — fully inclusive of enterprise cloud hosting and managed domains.',
+    deliverables: [
+      { num: '01', name: 'Brand-Aligned UI/UX Design', desc: 'Custom corporate design matching your exact palette, typography, and voice.' },
+      { num: '02', name: 'High-Performance Hosting — FREE for 1 Year', desc: 'Ultra-fast, enterprise-grade cloud hosting included at zero cost for 12 months.' },
+      { num: '03', name: 'Domain Registration — FREE for 1 Year', desc: 'Seamless custom domain registration fully managed and secured.' },
+      { num: '04', name: 'Professional Email Setup', desc: 'Turnkey Hostinger business email and Google Workspace / Gmail integration.' },
+      { num: '05', name: 'SEO-Ready Architecture', desc: 'Structured metadata, clean semantic markup, and speed optimization for search rankings.' },
+      { num: '06', name: 'Multi-Device Responsiveness', desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops, and ultra-wide displays.' }
+    ]
+  },
+  {
+    id: 'webapps',
+    stepNumber: '03',
+    stepPhase: 'PHASE 03 // OPERATIONS',
+    tabLabel: '03. Enterprise Systems',
+    title: 'Web Apps & Business Systems',
+    tagline: 'Bespoke administrative command eliminating operational friction and bottlenecks.',
+    icon: Cpu,
+    image: '/Images/services/enterprise-systems-atelier.jpg',
+    imageAlt: 'Executive enterprise software dashboard and real-time logistics interface',
+    hallmark: 'Real-Time Supply Chain, Automated Pipelines & Centralized Core',
+    badgeText: 'CENTRALIZED // ZERO BOTTLENECKS',
+    specs: [
+      { label: 'Architecture', val: 'Custom Central Backend' },
+      { label: 'Workflows', val: 'Automated Pipelines' },
+      { label: 'Security', val: 'Role-Based Access' }
+    ],
+    summary: 'Custom web applications and operational dashboards tailored to eliminate manual bottlenecks, streamline workflows, and automate core enterprise operations.',
+    deliverables: [
+      { num: '01', name: 'Company Backend Systems', desc: 'Robust centralized backends handling enterprise logic and secure operations.' },
+      { num: '02', name: 'Production Management Platforms', desc: 'End-to-end tracking for manufacturing, scheduling, and output management.' },
+      { num: '03', name: 'Supply Chain & Logistics Dashboards', desc: 'Real-time visibility into inventory, order pipelines, and shipment tracking.' },
+      { num: '04', name: 'Order Processing & Tracking Systems', desc: 'Automated workflows from customer order placement to delivery fulfillment.' },
+      { num: '05', name: 'Internal Workflow Automation', desc: 'Eliminate repetitive manual tasks through reliable custom automation pipelines.' },
+      { num: '06', name: 'Custom Portals & Admin Panels', desc: 'Tailored administrative interfaces with role-based security and granular permissions.' }
+    ]
   }
-};
-
-const checkIconVariants = {
-  hidden: { scale: 0.4, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 450,
-      damping: 22
-    }
-  }
-};
+];
 
 export default function Services({ onOpenContact }) {
-  const [expandedStages, setExpandedStages] = useState({});
+  const [activeStageId, setActiveStageId] = useState('branding');
 
-  const toggleStageExpand = (stageId) => {
-    setExpandedStages(prev => ({
-      ...prev,
-      [stageId]: !prev[stageId]
-    }));
-  };
-
-  const stages = [
-    {
-      id: 'branding',
-      stepNumber: '01',
-      stepPhase: 'FOUNDATION',
-      title: 'Brand Systems & Corporate Identity',
-      icon: Palette,
-      image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=800&q=80',
-      summary: 'Cohesive, premium corporate brand systems engineered to establish instant market authority and command respect across print, digital, and physical environments.',
-      highlights: [
-        'Custom Logo & Vector Mark Architecture',
-        'Complete Executive Stationery Suite',
-        'Staff Identity & Credential Systems',
-        'Authoritative Brand Guidelines Book'
-      ],
-      deliverables: [
-        { name: 'Logo Design & Identity Creation', desc: 'Custom-crafted marks reflecting personality, values, and market authority.' },
-        { name: 'Complete Stationery Suite', desc: 'Business cards, letterheads, envelopes, folders, and invoice templates.' },
-        { name: 'Staff Identity Assets', desc: 'Shirt name tags, ID badges, desk plaques, and company credential systems.' },
-        { name: 'Marketing & Sales Collateral', desc: 'Sale signs, billboard designs, posters, flyers, brochures, and POS branding.' },
-        { name: 'Digital Brand Kits', desc: 'Social media kits, profile banners, post templates, and digital assets.' },
-        { name: 'Website Branding Assets', desc: 'Custom icons, UI components, brand-aligned graphics, and design systems.' },
-        { name: 'Brand Guidelines & Brand Book', desc: 'Complete manual covering logo rules, palettes, typography, and tone of voice.' }
-      ]
-    },
-    {
-      id: 'websites',
-      stepNumber: '02',
-      stepPhase: 'HEADQUARTERS',
-      title: 'Corporate Website Platforms',
-      icon: Globe,
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-      summary: 'High-converting corporate websites engineered for sub-second performance, credibility, and brand consistency — fully inclusive of enterprise cloud hosting and managed domains.',
-      highlights: [
-        'High-Performance Hosting — FREE for 1 Year',
-        'Custom Domain Registration — FREE for 1 Year',
-        'Turnkey Professional Business Email',
-        'Technical SEO Architecture & Sub-second LCP'
-      ],
-      deliverables: [
-        { name: 'Brand-Aligned UI/UX Design', desc: 'Custom corporate design matching your exact palette, typography, and voice.' },
-        { name: 'High-Performance Hosting — FREE for 1 Year', desc: 'Ultra-fast, enterprise-grade cloud hosting included at zero cost for 12 months.' },
-        { name: 'Domain Registration — FREE for 1 Year', desc: 'Seamless custom domain registration fully managed and secured.' },
-        { name: 'Professional Email Setup', desc: 'Turnkey Hostinger business email and Google Workspace / Gmail integration.' },
-        { name: 'SEO-Ready Architecture', desc: 'Structured metadata, clean semantic markup, and speed optimization for search rankings.' },
-        { name: 'Multi-Device Responsiveness', desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops, and ultra-wide displays.' }
-      ]
-    },
-    {
-      id: 'webapps',
-      stepNumber: '03',
-      stepPhase: 'OPERATIONS',
-      title: 'Web Apps & Business Systems',
-      icon: Cpu,
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-      summary: 'Custom web applications and operational dashboards tailored to eliminate manual bottlenecks, streamline workflows, and automate core enterprise operations.',
-      highlights: [
-        'Centralized Company Backend Systems',
-        'Real-time Inventory & Logistics Dashboards',
-        'Automated Order Processing Engines',
-        'Granular Role-Based Security & Permissions'
-      ],
-      deliverables: [
-        { name: 'Company Backend Systems', desc: 'Robust centralized backends handling enterprise logic and secure operations.' },
-        { name: 'Production Management Platforms', desc: 'End-to-end tracking for manufacturing, scheduling, and output management.' },
-        { name: 'Supply Chain & Logistics Dashboards', desc: 'Real-time visibility into inventory, order pipelines, and shipment tracking.' },
-        { name: 'Order Processing & Tracking Systems', desc: 'Automated workflows from customer order placement to delivery fulfillment.' },
-        { name: 'Internal Workflow Automation', desc: 'Eliminate repetitive manual tasks through reliable custom automation pipelines.' },
-        { name: 'Custom Portals & Admin Panels', desc: 'Tailored administrative interfaces with role-based security and granular permissions.' }
-      ]
-    }
-  ];
+  const currentStage = stages.find(s => s.id === activeStageId) || stages[0];
+  const Icon = currentStage.icon;
 
   return (
-    <section className="services-section" id="services">
+    <section className="services-section atelier-services-section" id="services">
       <div className="container">
         {/* Section Header */}
         <motion.div
@@ -145,163 +113,168 @@ export default function Services({ onOpenContact }) {
         >
           <span className="section-tag">SYSTEM LIFECYCLE // 3-STAGE PIPELINE</span>
           <h2 className="section-title">From Brand Identity to Enterprise Systems</h2>
+          <p className="atelier-header-subtitle">
+            We design the tangible identity, digital headquarters, and operational intelligence that power modern enterprises.
+          </p>
         </motion.div>
 
-        {/* Minimal 3-Column Glass Bento Grid */}
-        <div className="minimal-services-grid">
-          {stages.map((stage, stageIdx) => {
-            const isExpanded = !!expandedStages[stage.id];
-            const Icon = stage.icon;
+        {/* Phase Tab Selector */}
+        <div className="atelier-tabs-container">
+          <div className="atelier-tabs-track" role="tablist">
+            {stages.map((stage) => {
+              const isActive = activeStageId === stage.id;
+              const StageIcon = stage.icon;
+              return (
+                <button
+                  key={stage.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`atelier-tab-btn ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActiveStageId(stage.id)}
+                >
+                  <StageIcon size={16} className="atelier-tab-icon" />
+                  <span className="atelier-tab-text">{stage.tabLabel}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="atelierTabIndicator"
+                      className="atelier-tab-indicator"
+                      transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-            return (
-              <motion.div
-                key={stage.id}
-                className="minimal-service-card"
-                initial={{ opacity: 0, y: 50, rotateX: 6 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                whileHover={{ y: -6 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{
-                  duration: 0.75,
-                  delay: stageIdx * 0.15,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-              >
-                {/* Top Subtle Luminous Rim */}
-                <div className="minimal-card-rim-glow" />
-
-                {/* Card Top Media Banner */}
-                <div className="minimal-card-media-banner">
-                  <img
-                    src={stage.image}
-                    alt={stage.title}
-                    className="minimal-card-img"
-                    loading="lazy"
-                  />
-                  <div className="minimal-card-media-overlay" />
-                  
-                  {/* Floating Meta Badges */}
-                  <div className="minimal-card-media-top">
-                    <span className="minimal-step-index">
-                      <span className="step-dot" />
-                      // {stage.stepNumber}
-                    </span>
-                    <span className="minimal-phase-tag">{stage.stepPhase}</span>
+        {/* The Atelier Showcase */}
+        <div className="atelier-showcase-wrapper">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStage.id}
+              className="atelier-stage-spread"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Top Hero Row: Split 2-Column (Narrative & Specs on Left, Visual Canvas on Right) */}
+              <div className="atelier-top-split">
+                {/* Left Pane: Meta, Title, Narrative, Specs, Deploy Button */}
+                <div className="atelier-left-pane">
+                  <div className="atelier-phase-meta">
+                    <span className="atelier-phase-step">{currentStage.stepPhase}</span>
+                    <div className="atelier-phase-pill">
+                      <Icon size={13} />
+                      <span>Stage {currentStage.stepNumber}</span>
+                    </div>
                   </div>
 
-                  <motion.div
-                    className="minimal-card-icon-wrap"
-                    initial={{ scale: 0.7, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      type: 'spring',
-                      stiffness: 400,
-                      damping: 20,
-                      delay: 0.25 + stageIdx * 0.15
-                    }}
-                  >
-                    <Icon size={18} className="minimal-card-icon" />
-                  </motion.div>
-                </div>
+                  <h3 className="atelier-stage-title">{currentStage.title}</h3>
+                  <p className="atelier-stage-tagline">{currentStage.tagline}</p>
+                  <p className="atelier-stage-summary">{currentStage.summary}</p>
 
-                {/* Title & Summary */}
-                <div className="minimal-card-body">
-                  <h3 className="minimal-card-title">{stage.title}</h3>
-                  <p className="minimal-card-summary">{stage.summary}</p>
-                </div>
-
-                {/* Hairline Divider */}
-                <div className="minimal-card-divider" />
-
-                {/* Key Deliverables Highlights */}
-                <div className="minimal-highlights-section">
-                  <span className="minimal-highlights-label">Core Deliverables</span>
-                  <motion.ul
-                    className="minimal-highlights-list"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.5, margin: "0px 0px -120px 0px" }}
-                    custom={stageIdx}
-                    variants={highlightListVariants}
-                  >
-                    {stage.highlights.map((point) => (
-                      <motion.li
-                        key={point}
-                        className="minimal-highlight-item"
-                        variants={highlightItemVariants}
-                      >
-                        <motion.span
-                          className="minimal-check-wrap"
-                          variants={checkIconVariants}
-                        >
-                          <CheckCircle2 size={15} className="minimal-check-icon" />
-                        </motion.span>
-                        <span>{point}</span>
-                      </motion.li>
+                  {/* Specs / Guarantees Row */}
+                  <div className="atelier-specs-row">
+                    {currentStage.specs.map((spec) => (
+                      <div key={spec.label} className="atelier-spec-card">
+                        <span className="atelier-spec-label">{spec.label}</span>
+                        <span className="atelier-spec-val">{spec.val}</span>
+                      </div>
                     ))}
-                  </motion.ul>
-                </div>
+                  </div>
 
-                {/* Expandable Specifications Inclusions */}
-                <div className="minimal-inclusions-wrapper">
-                  <button
-                    type="button"
-                    onClick={() => toggleStageExpand(stage.id)}
-                    className="minimal-expand-btn"
-                    aria-expanded={isExpanded}
-                  >
-                    <span>{isExpanded ? 'Hide Specifications' : `View Full Scope (${stage.deliverables.length} Items)`}</span>
-                    <ChevronDown
-                      size={15}
-                      style={{
-                        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.3s ease'
+                  {/* Deploy Action */}
+                  <div className="atelier-cta-row">
+                    <a
+                      href="#contact"
+                      className="glass-btn atelier-deploy-btn"
+                      onClick={(e) => {
+                        if (onOpenContact) {
+                          e.preventDefault();
+                          onOpenContact();
+                        }
                       }}
+                    >
+                      <span>Deploy Stage {currentStage.stepNumber}</span>
+                      <ArrowRight size={16} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Pane: Cinematic Tactile Visual Canvas */}
+                <div className="atelier-right-pane">
+                  <div className="atelier-canvas-frame">
+                    <motion.img
+                      src={currentStage.image}
+                      alt={currentStage.imageAlt}
+                      className="atelier-main-img"
+                      initial={{ scale: 1.04, opacity: 0.85 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                      loading="eager"
                     />
-                  </button>
+                    <div className="atelier-canvas-overlay" />
 
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        className="minimal-deliverables-drawer"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    {/* Top Floating Badge */}
+                    <motion.div
+                      className="atelier-floating-badge"
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.18, duration: 0.35 }}
+                    >
+                      <Sparkles size={13} className="atelier-badge-icon" />
+                      <span>{currentStage.badgeText}</span>
+                    </motion.div>
+
+                    {/* Bottom Curator's Hallmark Seal */}
+                    <motion.div
+                      className="atelier-hallmark-seal"
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.28, duration: 0.35 }}
+                    >
+                      <div className="hallmark-glow-dot" />
+                      <div className="hallmark-text">
+                        <span className="hallmark-label">CURATED ASSURANCE</span>
+                        <span className="hallmark-desc">{currentStage.hallmark}</span>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Full-Width Deliverables Directory */}
+              <div className="atelier-deliverables-fullwidth">
+                <div className="atelier-directory-header">
+                  <div className="atelier-directory-title-group">
+                    <span className="atelier-directory-title">Curated Deliverables Scope</span>
+                    <span className="atelier-directory-subtitle">Complete specifications & outputs for Stage {currentStage.stepNumber}</span>
+                  </div>
+                  <span className="atelier-directory-count">{currentStage.deliverables.length} Deliverables</span>
+                </div>
+
+                <div className="atelier-directory-grid-full">
+                  {currentStage.deliverables.map((item, idx) => {
+                    const isLastOdd = currentStage.deliverables.length % 3 === 1 && idx === currentStage.deliverables.length - 1;
+                    return (
+                      <div
+                        key={item.num}
+                        className={`atelier-directory-card ${isLastOdd ? 'span-full-row' : ''}`}
                       >
-                        <div className="minimal-drawer-inner">
-                          {stage.deliverables.map((item) => (
-                            <div key={item.name} className="minimal-deliverable-box">
-                              <span className="deliverable-box-name">{item.name}</span>
-                              <p className="deliverable-box-desc">{item.desc}</p>
-                            </div>
-                          ))}
+                        <div className="atelier-card-top">
+                          <span className="atelier-card-num">{item.num}</span>
+                          <span className="atelier-card-name">{item.name}</span>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                        <p className="atelier-card-desc">{item.desc}</p>
+                      </div>
+                    );
+                  })}
                 </div>
-
-                {/* Card Footer Actions */}
-                <div className="minimal-card-footer">
-                  <a
-                    href="#contact"
-                    className="minimal-card-cta"
-                    onClick={(e) => {
-                      if (onOpenContact) {
-                        e.preventDefault();
-                        onOpenContact();
-                      }
-                    }}
-                  >
-                    <span>Deploy Stage {stage.stepNumber}</span>
-                    <ArrowRight size={15} />
-                  </a>
-                </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Bottom Milestone Integration Banner */}
