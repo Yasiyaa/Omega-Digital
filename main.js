@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.getElementById('hero');
 
   // Logo Sources
-  const logoWhite = 'Images/1 logo_Logo concept 1 copy 4.png';
-  const logoColor = 'Images/1 logo_Logo concept 1 copy 2.png';
+  const logoWhite = 'Images/inovation logo/1 logo_Logo concept 1 copy 2.png';
+  const logoColor = 'Images/inovation logo/1 logo_Logo concept 1 copy 2.png';
 
   const updateNavbarState = () => {
     if (!heroSection || !navContainer || !navbarLogo) return;

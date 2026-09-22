@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, MapPin, Clock } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const DAYS_SCHEDULE = [
+  { key: 'MON', label: 'Monday', hours: '8:00 AM – 6:30 PM', isOpen: true },
+  { key: 'TUE', label: 'Tuesday', hours: '8:00 AM – 6:30 PM', isOpen: true },
+  { key: 'WED', label: 'Wednesday', hours: '8:00 AM – 6:30 PM', isOpen: true },
+  { key: 'THU', label: 'Thursday', hours: '8:00 AM – 6:30 PM', isOpen: true },
+  { key: 'FRI', label: 'Friday', hours: '8:00 AM – 6:30 PM', isOpen: true },
+  { key: 'SAT', label: 'Saturday', hours: '8:00 AM – 2:30 PM', isOpen: true },
+  { key: 'SUN', label: 'Sunday & Holidays', hours: 'CLOSED', isOpen: false },
+];
 
 export default function Footer({ onOpenContact }) {
+  const [selectedDay, setSelectedDay] = useState(() => {
+    const dayMap = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    return dayMap[new Date().getDay()] || 'MON';
+  });
+
+  const currentDayInfo = DAYS_SCHEDULE.find((d) => d.key === selectedDay) || DAYS_SCHEDULE[0];
   return (
     <footer className="site-footer">
       <div className="container">
@@ -10,7 +27,7 @@ export default function Footer({ onOpenContact }) {
           <div className="footer-brand-col">
             <a href="#hero" className="footer-logo">
               <img
-                src="/Images/1 logo_Logo concept 1 copy 4.png"
+                src="/Images/inovation logo/1 logo_Logo concept 1 copy 2.png"
                 alt="Omega Innovation"
                 className="footer-logo-img"
               />
@@ -51,7 +68,7 @@ export default function Footer({ onOpenContact }) {
           <div className="footer-nav-col">
             <h4 className="footer-col-title">Core Disciplines</h4>
             <ul className="footer-links">
-              <li><a href="#services">Full Company Branding</a></li>
+              <li><a href="#services">Complete Company Branding</a></li>
               <li><a href="#services">Stationery & Business Cards</a></li>
               <li><a href="#services">Corporate Websites (1-Yr Free Hosting)</a></li>
               <li><a href="#services">Web App Solutions for Business</a></li>
@@ -89,26 +106,57 @@ export default function Footer({ onOpenContact }) {
             <h4 className="footer-col-title">Direct Inquiries</h4>
             <div className="footer-contact-info">
               <p><Mail size={18} /> <span>hello@omegainnovation.com</span></p>
-              <p><MapPin size={18} /> <span>Colombo & Melbourne Hubs</span></p>
+              <p><MapPin size={18} /> <span>Melbourne & Colombo Hubs</span></p>
 
+              {/* Interactive Horizontal Open Hours */}
               <div className="footer-hours-block">
-                <div className="footer-hours-header">
-                  <Clock size={15} />
-                  <span>Business Hours</span>
+                <div className="footer-hours-header-row">
+                  <div className="footer-hours-title-wrap">
+                    <Clock size={15} className="footer-hours-clock-icon" />
+                    <span className="footer-hours-label">OPEN HOURS</span>
+                  </div>
+                  <span className="footer-hours-tz">MELBOURNE (AEST)</span>
                 </div>
-                <div className="footer-hours-list">
-                  <div className="hours-entry">
-                    <span className="hours-days">Monday – Friday:</span>
-                    <span className="hours-time">8:00 am – 6:00 pm</span>
-                  </div>
-                  <div className="hours-entry">
-                    <span className="hours-days">Saturday:</span>
-                    <span className="hours-time">8:30 am – 2:00 pm</span>
-                  </div>
-                  <div className="hours-entry">
-                    <span className="hours-days">Sunday & Holidays:</span>
-                    <span className="hours-time hours-closed">Closed</span>
-                  </div>
+
+                <div className="footer-hours-info-row">
+                  <span className="footer-hours-day-name">{currentDayInfo.label}</span>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={selectedDay}
+                      initial={{ opacity: 0, y: -3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 3 }}
+                      transition={{ duration: 0.15 }}
+                      className={`footer-hours-display ${!currentDayInfo.isOpen ? 'is-closed' : ''}`}
+                    >
+                      {currentDayInfo.hours}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+
+                <div className="footer-hours-days-track">
+                  {DAYS_SCHEDULE.map((day) => {
+                    const isActive = selectedDay === day.key;
+                    return (
+                      <button
+                        key={day.key}
+                        type="button"
+                        onClick={() => setSelectedDay(day.key)}
+                        className={`footer-day-tab ${isActive ? 'active' : ''}`}
+                        aria-label={`${day.label}: ${day.hours}`}
+                        aria-pressed={isActive}
+                      >
+                        <span className="footer-day-text">{day.key}</span>
+                        {isActive && (
+                          <motion.div
+                            layoutId="footerDayUnderline"
+                            className="footer-day-underline"
+                            transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                          />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>

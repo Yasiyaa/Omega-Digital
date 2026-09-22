@@ -198,7 +198,7 @@ export default function ContactModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="modal-service">Core Disciplines Required</label>
+                      <label htmlFor="modal-service">Core Disciplines</label>
                       <select
                         id="modal-service"
                         name="service"
@@ -207,7 +207,7 @@ export default function ContactModal({ isOpen, onClose }) {
                         required
                       >
                         <option value="" disabled>Select your primary objective</option>
-                        <option value="branding">Business Cards & Full Company Branding Suite</option>
+                        <option value="branding">Business Cards & Complete Company Branding Suite</option>
                         <option value="corporate-web">Corporate Website Platform (1-Yr Free Hosting & Domain)</option>
                         <option value="web-apps">Custom Web Apps (Portals, Dashboards, Internal Systems)</option>
                         <option value="end-to-end">Full Digital Transformation (Branding + Web + Apps)</option>

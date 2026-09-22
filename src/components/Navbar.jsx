@@ -34,7 +34,7 @@ export default function Navbar({ onOpenContact }) {
     };
   }, [mobileOpen]);
 
-  const logoSrc = '/Images/1 logo_Logo concept 1 copy 4.png';
+  const logoSrc = '/Images/inovation logo/1 logo_Logo concept 1 copy 2.png';
 
   const navLinks = [
     { name: 'Services', href: '#services' },

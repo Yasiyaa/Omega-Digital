@@ -83,7 +83,7 @@ export default function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="service">Core Disciplines Required</label>
+                <label htmlFor="service">Core Disciplines</label>
                 <select
                   id="service"
                   name="service"
@@ -92,7 +92,7 @@ export default function Contact() {
                   required
                 >
                   <option value="" disabled>Select your primary objective</option>
-                  <option value="branding">Business Cards & Full Company Branding Suite</option>
+                  <option value="branding">Business Cards & Complete Company Branding Suite</option>
                   <option value="corporate-web">Full Corporate Website (with 1-Yr Free Hosting & Domain)</option>
                   <option value="web-apps">Web App Solutions for Business (Backends, Portals, Dashboards)</option>
                   <option value="end-to-end">End-to-End Digital Transformation (Branding + Web + Apps)</option>

@@ -84,7 +84,7 @@ export default function Preloader({ onComplete }) {
         {/* Illuminated Emblem */}
         <div className="preloader-logo-wrapper">
           <motion.img
-            src="/Images/1 logo_Logo concept 1 copy 4.png"
+            src="/Images/inovation logo/1 logo_Logo concept 1 copy 2.png"
             alt="Omega Innovation"
             className="preloader-logo"
             animate={{
@@ -99,8 +99,7 @@ export default function Preloader({ onComplete }) {
           />
         </div>
 
-        {/* Brand Title & Tagline */}
-        <h3 className="preloader-brand-title">OMEGA INNOVATION</h3>
+        {/* Brand Tagline */}
         <p className="preloader-tagline">
           Digital Architecture &bull; Creative Craft
         </p>
