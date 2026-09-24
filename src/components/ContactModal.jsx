@@ -236,7 +236,7 @@ export default function ContactModal({ isOpen, onClose }) {
                         value={formData.message}
                         onChange={handleChange}
                         rows={3}
-                        placeholder="Briefly describe your objectives, existing stack, and key targets..."
+                        placeholder="Briefly describe your objectives, existing stack and key targets..."
                         required
                       />
                     </div>

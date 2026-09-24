@@ -6,7 +6,7 @@ export default function Preloader({ onComplete }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // Calibrated progressive counter: steady, deliberate, and prestigious
+    // Calibrated progressive counter: steady, deliberate and prestigious
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {

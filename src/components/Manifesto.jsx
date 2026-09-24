@@ -82,7 +82,7 @@ export default function Manifesto() {
               Your Competitive Edge.
             </h2>
             <p className="manifesto-paragraph">
-              Your brand shapes perception, builds trust and creates meaningful connections at every stage of the customer journey. Behind every successful business, however, is a powerful digital foundation that enables growth, efficiency and innovation.
+              Your brand shapes perception, builds trust and creates meaningful connections at every stage of the customer journey. Behind every successful business is a powerful digital foundation that enables growth, efficiency and innovation.
               <br /><br />
               At Omega Innovation, we design and develop the digital ecosystems that power modern businesses. From strategic brand identities and immersive digital experiences to custom web applications and intelligent automation, we create solutions that streamline operations, enhance performance and position organisations for sustainable growth.
             </p>

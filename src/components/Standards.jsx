@@ -16,7 +16,7 @@ const pillars = [
     metric: '100/100',
     metricLabel: 'Lighthouse Target',
     icon: Zap,
-    description: 'Zero render-blocking scripts, native modern image optimization, and global edge cache delivery for instantaneous page loads.',
+    description: 'Zero render-blocking scripts, native modern image optimization and global edge cache delivery for instantaneous page loads.',
     specs: ['< 200ms Global TTFB', 'React / Next.js Edge SSR', 'Automated AVIF/WebP', 'Zero Bloated Plugins'],
     gaugeType: 'circle',
     telemetryText: 'CORE_WEB_VITALS: OPTIMAL'
@@ -27,7 +27,7 @@ const pillars = [
     metric: '256-BIT',
     metricLabel: 'End-to-End TLS',
     icon: ShieldCheck,
-    description: 'Sanitized input pipelines, encrypted PostgreSQL databases, strict Content Security Policies, and automated vulnerability audits.',
+    description: 'Sanitized input pipelines, encrypted PostgreSQL databases, strict Content Security Policies and automated vulnerability audits.',
     specs: ['Zero-Trust Architecture', 'Sanitized Input Validation', 'Role-Based Access (RBAC)', 'Strict CSP Security Headers'],
     gaugeType: 'shield',
     telemetryText: 'SECURITY_SHIELD: ARMED'
@@ -38,7 +38,7 @@ const pillars = [
     metric: '100%',
     metricLabel: 'Direct Transfer',
     icon: GitBranch,
-    description: 'You own every line of source code, Figma design system token, and DNS deployment from day one. Zero proprietary vendor lock-in.',
+    description: 'You own every line of source code, Figma design system token and DNS deployment from day one. Zero proprietary vendor lock-in.',
     specs: ['Direct GitHub Repo Handoff', 'Documented Figma Tokens', 'Automated CI/CD Pipelines', '0% Proprietary Lock-In'],
     gaugeType: 'terminal',
     telemetryText: 'REPO_ACCESS: GRANTED'

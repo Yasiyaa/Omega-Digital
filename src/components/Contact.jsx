@@ -121,7 +121,7 @@ export default function Contact() {
                   rows="4"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Briefly describe your company, current systems or branding bottlenecks, and desired deliverables..."
+                  placeholder="Briefly describe your company, current systems or branding bottlenecks and desired deliverables..."
                 />
               </div>
             </div>

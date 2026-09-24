@@ -16,7 +16,7 @@ const stages = [
     stepPhase: 'PHASE 01 // FOUNDATION',
     tabLabel: '01. Brand Systems',
     title: 'Brand Systems & Corporate Identity',
-    tagline: 'Tangible authority engineered for print, physical spaces, and digital presence.',
+    tagline: 'Tangible authority engineered for print, physical spaces and digital presence.',
     icon: Palette,
     image: '/Images/services/brand-identity-atelier.jpg',
     imageAlt: 'Luxury corporate brand identity, business cards and brand guidelines book',
@@ -27,15 +27,15 @@ const stages = [
       { label: 'Collateral', val: '7 Complete Sets' },
       { label: 'Guidelines', val: 'Full Brand Manual' }
     ],
-    summary: 'Cohesive, premium corporate brand systems engineered to establish instant market authority and command respect across print, digital, and physical environments.',
+    summary: 'Cohesive, premium corporate brand systems engineered to establish instant market authority and command respect across print, digital and physical environments.',
     deliverables: [
-      { num: '01', name: 'Logo Design & Identity Creation', desc: 'Custom-crafted marks reflecting personality, values, and market authority.' },
-      { num: '02', name: 'Complete Stationery Suite', desc: 'Business cards, letterheads, envelopes, folders, and invoice templates.' },
-      { num: '03', name: 'Staff Identity Assets', desc: 'Shirt name tags, ID badges, desk plaques, and company credential systems.' },
-      { num: '04', name: 'Marketing & Sales Collateral', desc: 'Sale signs, billboard designs, posters, flyers, brochures, and POS branding.' },
-      { num: '05', name: 'Digital Brand Kits', desc: 'Social media kits, profile banners, post templates, and digital assets.' },
-      { num: '06', name: 'Website Branding Assets', desc: 'Custom icons, UI components, brand-aligned graphics, and design systems.' },
-      { num: '07', name: 'Brand Guidelines & Brand Book', desc: 'Complete manual covering logo rules, palettes, typography, and tone of voice.' }
+      { num: '01', name: 'Logo Design & Identity Creation', desc: 'Custom-crafted marks reflecting personality, values and market authority.' },
+      { num: '02', name: 'Complete Stationery Suite', desc: 'Business cards, letterheads, envelopes, folders and invoice templates.' },
+      { num: '03', name: 'Staff Identity Assets', desc: 'Shirt name tags, ID badges, desk plaques and company credential systems.' },
+      { num: '04', name: 'Marketing & Sales Collateral', desc: 'Sale signs, billboard designs, posters, flyers, brochures and POS branding.' },
+      { num: '05', name: 'Digital Brand Kits', desc: 'Social media kits, profile banners, post templates and digital assets.' },
+      { num: '06', name: 'Website Branding Assets', desc: 'Custom icons, UI components, brand-aligned graphics and design systems.' },
+      { num: '07', name: 'Brand Guidelines & Brand Book', desc: 'Complete manual covering logo rules, palettes, typography and tone of voice.' }
     ]
   },
   {
@@ -47,7 +47,7 @@ const stages = [
     tagline: 'Sub-second responsiveness synchronized across all executive viewports.',
     icon: Globe,
     image: '/Images/services/responsive-devices-atelier.jpg',
-    imageAlt: 'Responsive corporate website mockup across laptop, tablet, and smartphone',
+    imageAlt: 'Responsive corporate website mockup across laptop, tablet and smartphone',
     hallmark: '1-Year Complimentary Cloud Hosting & Managed Domain Included',
     badgeText: 'MULTI-DEVICE // SUB-SECOND LCP',
     specs: [
@@ -55,14 +55,14 @@ const stages = [
       { label: 'Domain Registration', val: 'Free for 1 Year' },
       { label: 'Performance', val: 'Sub-second LCP' }
     ],
-    summary: 'High-converting corporate websites engineered for sub-second performance, credibility, and brand consistency — fully inclusive of enterprise cloud hosting and managed domains.',
+    summary: 'High-converting corporate websites engineered for sub-second performance, credibility and brand consistency — fully inclusive of enterprise cloud hosting and managed domains.',
     deliverables: [
-      { num: '01', name: 'Brand-Aligned UI/UX Design', desc: 'Custom corporate design matching your exact palette, typography, and voice.' },
+      { num: '01', name: 'Brand-Aligned UI/UX Design', desc: 'Custom corporate design matching your exact palette, typography and voice.' },
       { num: '02', name: 'High-Performance Hosting — FREE for 1 Year', desc: 'Ultra-fast, enterprise-grade cloud hosting included at zero cost for 12 months.' },
       { num: '03', name: 'Domain Registration — FREE for 1 Year', desc: 'Seamless custom domain registration fully managed and secured.' },
       { num: '04', name: 'Professional Email Setup', desc: 'Turnkey Hostinger business email and Google Workspace / Gmail integration.' },
-      { num: '05', name: 'SEO-Ready Architecture', desc: 'Structured metadata, clean semantic markup, and speed optimization for search rankings.' },
-      { num: '06', name: 'Multi-Device Responsiveness', desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops, and ultra-wide displays.' }
+      { num: '05', name: 'SEO-Ready Architecture', desc: 'Structured metadata, clean semantic markup and speed optimization for search rankings.' },
+      { num: '06', name: 'Multi-Device Responsiveness', desc: 'Fluid layouts that look immaculate on mobile phones, tablets, laptops and ultra-wide displays.' }
     ]
   },
   {
@@ -82,11 +82,11 @@ const stages = [
       { label: 'Workflows', val: 'Automated Pipelines' },
       { label: 'Security', val: 'Role-Based Access' }
     ],
-    summary: 'Custom web applications and operational dashboards tailored to eliminate manual bottlenecks, streamline workflows, and automate core enterprise operations.',
+    summary: 'Custom web applications and operational dashboards tailored to eliminate manual bottlenecks, streamline workflows and automate core enterprise operations.',
     deliverables: [
       { num: '01', name: 'Company Backend Systems', desc: 'Robust centralized backends handling enterprise logic and secure operations.' },
-      { num: '02', name: 'Production Management Platforms', desc: 'End-to-end tracking for manufacturing, scheduling, and output management.' },
-      { num: '03', name: 'Supply Chain & Logistics Dashboards', desc: 'Real-time visibility into inventory, order pipelines, and shipment tracking.' },
+      { num: '02', name: 'Production Management Platforms', desc: 'End-to-end tracking for manufacturing, scheduling and output management.' },
+      { num: '03', name: 'Supply Chain & Logistics Dashboards', desc: 'Real-time visibility into inventory, order pipelines and shipment tracking.' },
       { num: '04', name: 'Order Processing & Tracking Systems', desc: 'Automated workflows from customer order placement to delivery fulfillment.' },
       { num: '05', name: 'Internal Workflow Automation', desc: 'Eliminate repetitive manual tasks through reliable custom automation pipelines.' },
       { num: '06', name: 'Custom Portals & Admin Panels', desc: 'Tailored administrative interfaces with role-based security and granular permissions.' }
@@ -114,7 +114,7 @@ export default function Services({ onOpenContact }) {
           <span className="section-tag">SYSTEM LIFECYCLE // 3-STAGE PIPELINE</span>
           <h2 className="section-title">From Brand Identity to Enterprise Systems</h2>
           <p className="atelier-header-subtitle">
-            We design the tangible identity, digital headquarters, and operational intelligence that power modern enterprises.
+            We design the tangible identity, digital headquarters and operational intelligence that power modern enterprises.
           </p>
         </motion.div>
 

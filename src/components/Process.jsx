@@ -8,7 +8,7 @@ const steps = [
     phase: 'PHASE 01 // ARCHITECTURE',
     title: 'Discovery & Strategy',
     icon: Compass,
-    text: 'We deconstruct your market position, operational goals, and core audience to forge an unassailable strategic roadmap.',
+    text: 'We deconstruct your market position, operational goals and core audience to forge an unassailable strategic roadmap.',
     deliverables: [
       'Market & Competitor Diagnosis',
       'Technical Architecture Scoping',
@@ -20,7 +20,7 @@ const steps = [
     phase: 'PHASE 02 // INTERFACE',
     title: 'Design & Prototyping',
     icon: PenTool,
-    text: 'Iterative visual explorations, tangible physical mockups, and interactive digital interfaces refined to perfection.',
+    text: 'Iterative visual explorations, tangible physical mockups and interactive digital interfaces refined to perfection.',
     deliverables: [
       'High-Fidelity Wireframes',
       'Custom Design System Tokens',
@@ -32,7 +32,7 @@ const steps = [
     phase: 'PHASE 03 // CORE ENGINE',
     title: 'Engineering & Build',
     icon: Code,
-    text: 'Writing immaculate, maintainable code with modern web standards, ironclad security, and peak performance.',
+    text: 'Writing immaculate, maintainable code with modern web standards, ironclad security and peak performance.',
     deliverables: [
       'Modular React Architecture',
       'Zero-Latency Edge Deployments',
@@ -44,7 +44,7 @@ const steps = [
     phase: 'PHASE 04 // EXPANSION',
     title: 'Deployment & Scale',
     icon: Rocket,
-    text: 'Seamless rollout, automated CI/CD pipelines, and dedicated post-launch optimizations for enduring success.',
+    text: 'Seamless rollout, automated CI/CD pipelines and dedicated post-launch optimizations for enduring success.',
     deliverables: [
       'Automated CI/CD Pipelines',
       'Global CDN Orchestration',

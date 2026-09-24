@@ -33,7 +33,7 @@ export default function Footer({ onOpenContact }) {
               />
             </a>
             <p className="footer-tagline">
-              Modern businesses demand precision — At Omega Innovation we deliver systems, digital HQs and cohesive brand identities that keep operations efficient, scalable, and future-ready.
+              Modern businesses demand precision — At Omega Innovation we deliver systems, digital HQs and cohesive brand identities that keep operations efficient, scalable and future-ready.
             </p>
             <div className="footer-socials">
               <a href="#" aria-label="LinkedIn">

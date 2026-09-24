@@ -87,7 +87,7 @@ export default function Hero({ onOpenContact }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          Omega Innovation creates high-performance digital ecosystems; combining brand identity, corporate websites, web applications, backend infrastructure, and business dashboards into systems designed to impress, convert, and grow with your organisation.
+          Omega Innovation creates high-performance digital ecosystems; combining brand identity, corporate websites, web applications, backend infrastructure and business dashboards into systems designed to impress, convert and grow with your organisation.
         </motion.p>
 
         <motion.div

@@ -3024,7 +3024,7 @@ button {
 }
 
 .footer-asic-logo {
-  height: 72px;
+  height: 128px;
   width: auto;
   object-fit: contain;
   opacity: 0.92;
@@ -3865,7 +3865,7 @@ button {
   }
 
   .footer-asic-logo {
-    height: 64px;
+    height: 100px;
   }
 }
 
