@@ -1,39 +1,53 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, AlertCircle } from 'lucide-react';
+import { submitInquiry, SERVICES_OPTIONS, TIMELINES_OPTIONS } from '../services/contactService';
 
 export default function Contact() {
-  const [status, setStatus] = useState('idle'); // idle | submitting | success
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [errorMessage, setErrorMessage] = useState('');
+  const [submissionResult, setSubmissionResult] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     service: '',
     timeline: 'standard',
-    message: ''
+    message: '',
+    botcheck: ''
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
 
-    setTimeout(() => {
+    const res = await submitInquiry(formData);
+
+    if (res.success) {
+      setSubmissionResult(res);
       setStatus('success');
       setFormData({
         fullName: '',
         email: '',
         service: '',
         timeline: 'standard',
-        message: ''
+        message: '',
+        botcheck: ''
       });
+    } else {
+      setStatus('error');
+      setErrorMessage(res.error || 'Transmission failed. Please reach out to hello@omegai.com.au directly.');
+    }
+  };
 
-      setTimeout(() => {
-        setStatus('idle');
-      }, 5000);
-    }, 1000);
+  const handleReset = () => {
+    setStatus('idle');
+    setErrorMessage('');
+    setSubmissionResult(null);
   };
 
   return (
@@ -54,108 +68,192 @@ export default function Contact() {
             </p>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-grid">
-              <div className="form-group">
-                <label htmlFor="fullName">Full Name</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Alexander Vance"
-                  required
-                />
+          {status === 'success' ? (
+            <motion.div
+              className="inline-contact-success"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="success-icon-badge">
+                <CheckCircle2 size={36} className="success-check-icon" />
+                <div className="success-pulse-glow" />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Work Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="alexander@company.com"
-                  required
-                />
+              <span className="section-tag">TRANSMISSION CONFIRMED // DELIVERED</span>
+              <h3 className="success-title">Inquiry Received</h3>
+              <p className="success-description">
+                Thank you, <strong>{submissionResult?.fullName}</strong>. Your project scope has been transmitted directly to <strong>hello@omegai.com.au</strong>.
+              </p>
+
+              {/* Automated Confirmation Note Notification */}
+              <div className="success-confirmation-note">
+                <div className="confirmation-note-header">
+                  <span className="confirmation-pulse-dot" />
+                  <span>Confirmation Note Dispatched</span>
+                </div>
+                <p>
+                  A confirmation receipt and scope summary have been sent to your email: <strong>{submissionResult?.email}</strong>.
+                </p>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="service">Core Disciplines</label>
-                <select
-                  id="service"
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
+              {/* Parameter Details Receipt */}
+              <div className="success-receipt-card">
+                <div className="receipt-row">
+                  <span className="receipt-label">Required Service</span>
+                  <span className="receipt-value highlight">{submissionResult?.serviceTitle}</span>
+                </div>
+                <div className="receipt-row">
+                  <span className="receipt-label">Target Timeline</span>
+                  <span className="receipt-value">{submissionResult?.timelineTitle}</span>
+                </div>
+                <div className="receipt-row">
+                  <span className="receipt-label">Dispatched To</span>
+                  <span className="receipt-value">hello@omegai.com.au &bull; omegai.com.au@gmail.com</span>
+                </div>
+              </div>
+
+              <div className="success-meta-strip">
+                <div className="success-meta-item">
+                  <Clock size={16} />
+                  <span>Response within 24h</span>
+                </div>
+                <div className="success-meta-divider" />
+                <div className="success-meta-item">
+                  <ShieldCheck size={16} />
+                  <span>NDA Protected</span>
+                </div>
+              </div>
+
+              <div className="success-actions" style={{ marginTop: '1.5rem' }}>
+                <button
+                  type="button"
+                  className="glass-btn"
+                  onClick={handleReset}
+                  style={{ cursor: 'pointer' }}
                 >
-                  <option value="" disabled>Select your primary objective</option>
-                  <option value="branding">Business Cards & Complete Company Branding Suite</option>
-                  <option value="corporate-web">Full Corporate Website (with 1-Yr Free Hosting & Domain)</option>
-                  <option value="web-apps">Web App Solutions for Business (Backends, Portals, Dashboards)</option>
-                  <option value="end-to-end">End-to-End Digital Transformation (Branding + Web + Apps)</option>
-                </select>
+                  <span>Submit Another Inquiry</span>
+                  <ArrowRight size={16} />
+                </button>
               </div>
+            </motion.div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              {/* Anti-spam honeypot */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                style={{ display: 'none' }}
+                tabIndex="-1"
+                autoComplete="off"
+                onChange={handleChange}
+              />
 
-              <div className="form-group">
-                <label htmlFor="timeline">Expected Delivery Time</label>
-                <select
-                  id="timeline"
-                  name="timeline"
-                  value={formData.timeline}
-                  onChange={handleChange}
-                >
-                  <option value="urgent">Urgent (Within 3 – 4 Weeks)</option>
-                  <option value="standard">Standard (1 – 2 Months)</option>
-                  <option value="strategic">Strategic / Ongoing Partnership</option>
-                </select>
-              </div>
-
-              <div className="form-group full-width">
-                <label htmlFor="message">Requirements & Operational Scope</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Briefly describe your company, current systems or branding bottlenecks and desired deliverables..."
-                />
-              </div>
-            </div>
-
-            <div className="form-actions">
-              <button
-                type="submit"
-                className="submit-btn"
-                disabled={status === 'submitting'}
-              >
-                {status === 'submitting' ? (
-                  <span>Transmitting Inquiry...</span>
-                ) : status === 'success' ? (
-                  <>
-                    <span>Inquiry Received</span>
-                    <CheckCircle size={18} />
-                  </>
-                ) : (
-                  <>
-                    <span>Submit Inquiry</span>
-                    <Send size={18} />
-                  </>
-                )}
-              </button>
-
-              {status === 'success' && (
-                <span className="form-status success">
-                  Thank you. An Omega Innovation partner will review your requirements and reach out within 24 hours.
-                </span>
+              {status === 'error' && (
+                <div className="contact-error-banner">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <AlertCircle size={16} />
+                    <span>{errorMessage}</span>
+                  </div>
+                  <a href="mailto:hello@omegai.com.au">Email Directly</a>
+                </div>
               )}
-            </div>
-          </form>
+
+              <div className="form-grid">
+                <div className="form-group">
+                  <label htmlFor="fullName">Full Name</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Alexander Vance"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Work Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="alexander@company.com"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="service">Core Disciplines</label>
+                  <select
+                    id="service"
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="" disabled>Select your primary objective</option>
+                    {SERVICES_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="timeline">Expected Delivery Time</label>
+                  <select
+                    id="timeline"
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleChange}
+                  >
+                    {TIMELINES_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group full-width">
+                  <label htmlFor="message">Requirements & Operational Scope</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Briefly describe your company, current systems or branding bottlenecks and desired deliverables..."
+                  />
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button
+                  type="submit"
+                  className="submit-btn"
+                  disabled={status === 'submitting'}
+                >
+                  {status === 'submitting' ? (
+                    <span>Transmitting Inquiry...</span>
+                  ) : (
+                    <>
+                      <span>Submit Inquiry</span>
+                      <Send size={18} />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
         </motion.div>
       </div>
     </section>
   );
 }
+

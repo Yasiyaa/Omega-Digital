@@ -3086,6 +3086,18 @@ button {
   flex-shrink: 0;
 }
 
+.footer-email-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-email-link:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .footer-hours-block {
   margin-top: 0.85rem;
   padding: 0.85rem 0.95rem 1rem;
@@ -4163,6 +4175,124 @@ button {
   color: #FFFFFF;
   text-decoration: underline;
 }
+
+/* Inquiry Confirmation Note & Receipt */
+.success-confirmation-note {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 12px;
+  padding: 0.9rem 1.25rem;
+  margin: 0 auto 1.4rem;
+  max-width: 520px;
+  text-align: left;
+}
+
+.confirmation-note-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38BDF8;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.confirmation-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+  display: inline-block;
+  animation: telemetryPulse 2s infinite;
+}
+
+.success-confirmation-note p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.success-confirmation-note p strong {
+  color: #FFFFFF;
+}
+
+.success-receipt-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  margin: 0 auto 1.5rem;
+  max-width: 520px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 0.86rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.5rem;
+}
+
+.receipt-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.receipt-label {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.receipt-value {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+.receipt-value.highlight {
+  color: #38BDF8;
+}
+
+/* Submission Error Alert */
+.contact-error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  text-align: left;
+}
+
+.contact-error-banner a {
+  color: #FFFFFF;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Inline Contact Success Screen */
+.inline-contact-success {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
 
 @media (max-width: 640px) {
   .contact-modal-card {

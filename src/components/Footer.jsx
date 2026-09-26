@@ -124,7 +124,18 @@ export default function Footer({ onOpenContact }) {
           <div className="footer-nav-col">
             <h4 className="footer-col-title">Direct Inquiries</h4>
             <div className="footer-contact-info">
-              <p><Mail size={18} /> <span>hello@omegainnovation.com</span></p>
+              <p>
+                <Mail size={18} />
+                <a href="mailto:hello@omegai.com.au" className="footer-email-link">
+                  hello@omegai.com.au
+                </a>
+              </p>
+              <p>
+                <Mail size={18} />
+                <a href="mailto:omegai.com.au@gmail.com" className="footer-email-link">
+                  omegai.com.au@gmail.com
+                </a>
+              </p>
               <p><MapPin size={18} /> <span>Melbourne & Colombo Hubs</span></p>
 
               {/* Interactive Horizontal Open Hours */}

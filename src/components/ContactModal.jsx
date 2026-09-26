@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight } from 'lucide-react';
+import { X, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, AlertCircle, Mail } from 'lucide-react';
+import { submitInquiry, SERVICES_OPTIONS, TIMELINES_OPTIONS } from '../services/contactService';
 
 export default function ContactModal({ isOpen, onClose }) {
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
+  const [submissionResult, setSubmissionResult] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     service: '',
     timeline: 'standard',
-    message: ''
+    message: '',
+    botcheck: ''
   });
 
   // Handle ESC key to dismiss modal
@@ -35,24 +39,34 @@ export default function ContactModal({ isOpen, onClose }) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
 
-    setTimeout(() => {
+    const res = await submitInquiry(formData);
+
+    if (res.success) {
+      setSubmissionResult(res);
       setStatus('success');
       setFormData({
         fullName: '',
         email: '',
         service: '',
         timeline: 'standard',
-        message: ''
+        message: '',
+        botcheck: ''
       });
-    }, 850);
+    } else {
+      setStatus('error');
+      setErrorMessage(res.error || 'Transmission could not be completed. Please contact hello@omegai.com.au.');
+    }
   };
 
   const handleReset = () => {
     setStatus('idle');
+    setErrorMessage('');
+    setSubmissionResult(null);
   };
 
   return (
@@ -112,11 +126,38 @@ export default function ContactModal({ isOpen, onClose }) {
                   <div className="success-pulse-glow" />
                 </div>
 
-                <span className="section-tag">TRANSMISSION CONFIRMED</span>
+                <span className="section-tag">TRANSMISSION CONFIRMED // DELIVERED</span>
                 <h3 className="success-title">Inquiry Received</h3>
                 <p className="success-description">
-                  Thank you for reaching out. Our principal systems architect has received your parameters and will review your scope within 24 hours.
+                  Thank you, <strong>{submissionResult?.fullName}</strong>. Your parameters have been transmitted directly to <strong>hello@omegai.com.au</strong>.
                 </p>
+
+                {/* Automated Confirmation Note Notification */}
+                <div className="success-confirmation-note">
+                  <div className="confirmation-note-header">
+                    <span className="confirmation-pulse-dot" />
+                    <span>Confirmation Note Dispatched</span>
+                  </div>
+                  <p>
+                    A receipt and copy of your selected service parameters have been sent to <strong>{submissionResult?.email}</strong>.
+                  </p>
+                </div>
+
+                {/* Parameter Details Receipt */}
+                <div className="success-receipt-card">
+                  <div className="receipt-row">
+                    <span className="receipt-label">Required Service</span>
+                    <span className="receipt-value highlight">{submissionResult?.serviceTitle}</span>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">Target Timeline</span>
+                    <span className="receipt-value">{submissionResult?.timelineTitle}</span>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">Inquiry Sent To</span>
+                    <span className="receipt-value">hello@omegai.com.au &bull; omegai.com.au@gmail.com</span>
+                  </div>
+                </div>
 
                 <div className="success-meta-strip">
                   <div className="success-meta-item">
@@ -167,8 +208,29 @@ export default function ContactModal({ isOpen, onClose }) {
                   </p>
                 </div>
 
+                {/* Error Banner if transmission failed */}
+                {status === 'error' && (
+                  <div className="contact-error-banner">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <AlertCircle size={16} />
+                      <span>{errorMessage}</span>
+                    </div>
+                    <a href="mailto:hello@omegai.com.au">Email Directly</a>
+                  </div>
+                )}
+
                 {/* Inquiry Form */}
                 <form className="contact-modal-form" onSubmit={handleSubmit}>
+                  {/* Anti-spam honeypot */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    style={{ display: 'none' }}
+                    tabIndex="-1"
+                    autoComplete="off"
+                    onChange={handleChange}
+                  />
+
                   <div className="form-grid">
                     <div className="form-group">
                       <label htmlFor="modal-fullName">Full Name</label>
@@ -207,10 +269,11 @@ export default function ContactModal({ isOpen, onClose }) {
                         required
                       >
                         <option value="" disabled>Select your primary objective</option>
-                        <option value="branding">Business Cards & Complete Company Branding Suite</option>
-                        <option value="corporate-web">Corporate Website Platform (1-Yr Free Hosting & Domain)</option>
-                        <option value="web-apps">Custom Web Apps (Portals, Dashboards, Internal Systems)</option>
-                        <option value="end-to-end">Full Digital Transformation (Branding + Web + Apps)</option>
+                        {SERVICES_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
@@ -222,9 +285,11 @@ export default function ContactModal({ isOpen, onClose }) {
                         value={formData.timeline}
                         onChange={handleChange}
                       >
-                        <option value="urgent">Urgent (Within 3 – 4 Weeks)</option>
-                        <option value="standard">Standard (1 – 2 Months)</option>
-                        <option value="strategic">Strategic / Ongoing Engagement</option>
+                        {TIMELINES_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
