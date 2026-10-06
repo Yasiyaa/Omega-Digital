@@ -120,6 +120,8 @@ export default function Manifesto() {
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
                 alt="Omega Innovation Strategic Studio"
                 className="manifesto-main-img"
+                width={1200}
+                height={800}
                 style={{ scale: imgScale }}
                 loading="lazy"
               />

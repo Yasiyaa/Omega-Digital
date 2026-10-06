@@ -210,10 +210,12 @@ export default function Services({ onOpenContact }) {
                       src={currentStage.image}
                       alt={currentStage.imageAlt}
                       className="atelier-main-img"
+                      width={1200}
+                      height={896}
                       initial={{ scale: 1.04, opacity: 0.85 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                      loading="eager"
+                      loading="lazy"
                     />
                     <div className="atelier-canvas-overlay" />
 

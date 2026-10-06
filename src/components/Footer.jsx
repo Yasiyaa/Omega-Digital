@@ -30,6 +30,9 @@ export default function Footer({ onOpenContact }) {
                 src="/Images/inovation logo/1 logo_Logo concept 1 copy 2.png"
                 alt="Omega Innovation"
                 className="footer-logo-img"
+                width="144"
+                height="42"
+                loading="lazy"
               />
             </a>
             <p className="footer-tagline">
@@ -77,6 +80,8 @@ export default function Footer({ onOpenContact }) {
                   src="/Images/asic-logo-white.png"
                   alt="ASIC - Australian Securities & Investments Commission"
                   className="footer-asic-logo"
+                  width="97"
+                  height="128"
                   loading="lazy"
                 />
               </a>

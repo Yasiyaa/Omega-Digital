@@ -39,6 +39,8 @@ export default function Hero({ onOpenContact }) {
           muted
           loop
           playsInline
+          preload="metadata"
+          poster="/Images/nasa-Q1p7bh3SHj8-unsplash.jpg"
           className="hero-video"
           id="hero-video"
         >

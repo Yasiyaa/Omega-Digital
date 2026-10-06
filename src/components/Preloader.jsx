@@ -87,6 +87,8 @@ export default function Preloader({ onComplete }) {
             src="/Images/inovation logo/1 logo_Logo concept 1 copy 2.png"
             alt="Omega Innovation"
             className="preloader-logo"
+            width={335}
+            height={98}
             animate={{
               filter: [
                 'drop-shadow(0 0 20px rgba(56, 189, 248, 0.35)) drop-shadow(0 0 45px rgba(244, 114, 182, 0.2))',

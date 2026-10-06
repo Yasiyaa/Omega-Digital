@@ -62,6 +62,8 @@ export default function Navbar({ onOpenContact }) {
               src={logoSrc}
               alt="Omega Innovation"
               className="nav-logo-img"
+              width="130"
+              height="38"
             />
           </a>
 

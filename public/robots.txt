@@ -1,0 +1,6 @@
+# Robots.txt for Omega Innovation (https://omegai.com.au)
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://omegai.com.au/sitemap.xml
